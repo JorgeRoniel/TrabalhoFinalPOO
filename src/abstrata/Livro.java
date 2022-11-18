@@ -5,7 +5,10 @@ public abstract class Livro {
     private String editora;
     private String isbn;
     private Integer preco;
+    public Livro()
+    {
 
+    }
     public Livro(String titulo, String editora, String isbn, Integer preco) {
         this.titulo = titulo;
         this.editora = editora;
