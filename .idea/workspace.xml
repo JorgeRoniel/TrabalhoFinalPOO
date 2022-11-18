@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9078aabf-b4dc-427b-aadd-04aa07b89005" name="Changes" comment="Adicionei a classe abstrata Livro.">
+    <list default="true" id="9078aabf-b4dc-427b-aadd-04aa07b89005" name="Changes" comment="Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento !">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entidades/LivroFisico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entidades/LivroFisico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/abstrata/Autor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/abstrata/Autor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/abstrata/Livro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/abstrata/Livro.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +65,7 @@
       <workItem from="1668793714406" duration="227000" />
       <workItem from="1668793944862" duration="161000" />
       <workItem from="1668794158359" duration="687000" />
-      <workItem from="1668794876117" duration="1677000" />
+      <workItem from="1668794876117" duration="2838000" />
     </task>
     <task id="LOCAL-00001" summary="Adicionei a classe abstrata Livro.">
       <created>1668794946689</created>
@@ -78,7 +81,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668795016326</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento !">
+      <created>1668796777620</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1668796777620</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -97,6 +107,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Adicionei a classe abstrata Livro." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicionei a classe abstrata Livro." />
+    <MESSAGE value="Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento !" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento !" />
   </component>
 </project>

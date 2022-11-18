@@ -13,6 +13,7 @@ public abstract class Autor
     private String nome;
     private LocalDate dataNascimento;
     private int Idade;
+    private String nacionalidade;
 
     public String getNome() {
         return nome;
