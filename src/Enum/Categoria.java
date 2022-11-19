@@ -4,7 +4,8 @@ public enum Categoria
 {
     AutoAjuda,
     Romance,
-    Ficcao,Historia,
+    Ficcao,
+    Historia,
     HQ,
     Religiao,
     Fantasia,

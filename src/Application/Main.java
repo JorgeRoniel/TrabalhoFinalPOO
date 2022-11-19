@@ -9,7 +9,5 @@ public class Main
     public static void main(String[] args)
     {
         List<Livro> livroList = new ArrayList<>();
-
-
     }
 }
