@@ -168,7 +168,7 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
 
     @Override
     public double getPrecoComJuros(double preco, int quantidadeParcelas) {
-        return IJuros.super.getPrecoComJuros(preco, quantidadeParcelas);
+        return Math.pow(1.1,quantidadeParcelas) * preco;
     }
 
     @Override
