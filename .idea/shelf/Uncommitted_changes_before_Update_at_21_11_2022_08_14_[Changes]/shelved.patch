@@ -1,0 +1,91 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -1,7 +1,11 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="9078aabf-b4dc-427b-aadd-04aa07b89005" name="Changes" comment="Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento e exceptions !" />
++    <list default="true" id="9078aabf-b4dc-427b-aadd-04aa07b89005" name="Changes" comment="Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento e exceptions !">
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Carrinho/Carrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Carrinho/Carrinho.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Interfaces/Carrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/Carrinho.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -67,6 +71,7 @@
+       <workItem from="1668794158359" duration="687000" />
+       <workItem from="1668794876117" duration="7835000" />
+       <workItem from="1668814405102" duration="3042000" />
++      <workItem from="1668818733662" duration="1021000" />
+     </task>
+     <task id="LOCAL-00001" summary="Adicionei a classe abstrata Livro.">
+       <created>1668794946689</created>
+@@ -117,7 +122,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1668817290837</updated>
+     </task>
+-    <option name="localTasksCounter" value="8" />
++    <task id="LOCAL-00008" summary="Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento e exceptions !">
++      <created>1668818760917</created>
++      <option name="number" value="00008" />
++      <option name="presentableId" value="LOCAL-00008" />
++      <option name="project" value="LOCAL" />
++      <updated>1668818760917</updated>
++    </task>
++    <option name="localTasksCounter" value="9" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+Index: src/Interfaces/Carrinho.java
+===================================================================
+diff --git a/src/Interfaces/Carrinho.java b/src/Interfaces/Carrinho.java
+--- a/src/Interfaces/Carrinho.java	
++++ b/src/Interfaces/Carrinho.java	
+@@ -5,5 +5,5 @@
+ public interface Carrinho
+ {
+     void AdicionarProduto(Livro livro, Integer quantidade);
+-    void RemoverProduto(Livro);
++    void RemoverProduto(Livro livro);
+ }
+Index: src/Carrinho/Carrinho.java
+===================================================================
+diff --git a/src/Carrinho/Carrinho.java b/src/Carrinho/Carrinho.java
+--- a/src/Carrinho/Carrinho.java	
++++ b/src/Carrinho/Carrinho.java	
+@@ -1,9 +1,11 @@
+ package Carrinho;
+ 
++import Exceptions.Excessao;
+ import abstrata.Livro;
+ import java.util.ArrayList;
+ import java.util.List;
+ import Interfaces.Carrinho;
++import Exceptions.Excessao;
+ 
+ public class Carrinho extends Livro implements Carrinho
+ {
+@@ -21,11 +23,11 @@
+         this.quantidadeParcelas = quantidadeParcelas;
+     }
+ 
+-    static
++    void Adiciona(Livro livro,Integer quantidadeProdutos) throws Excessao
+     {
+-        for(Livro livros: livroList)
+-        {
+-            somaTotal += livros.getPreco();
+-        }
++        if(quantidadeProdutos <=0)
++            throw new Excessao(quantidadeProdutos);
++
++        livroList.add(livro);
+     }
+ }

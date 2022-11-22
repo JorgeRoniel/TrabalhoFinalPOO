@@ -3,11 +3,12 @@ package Livros;
 import Exceptions.Excessao;
 import Interfaces.IDesconto;
 
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
 public class LivroVirtual extends Livro implements IDesconto {
-    public LivroVirtual(String titulo, String editora, String isbn, Integer preco, GregorianCalendar DataPubli) {
-        super(titulo, editora, isbn, preco, DataPubli);
+    public LivroVirtual(String titulo, String editora, String isbn, Double preco, LocalDate dataPublicacao) {
+        super(titulo, editora, isbn, preco, dataPublicacao);
     }
 
     @Override
