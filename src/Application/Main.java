@@ -42,6 +42,8 @@ public class Main {
     {
         /* Fiz a lógica para adicionar ao carrinho e cobrança
             Falta fazer a lógica para tratamento de erros
+
+            Inserir a lógica para o autor também está faltando, faz aí.
          */
 
         Menu();
