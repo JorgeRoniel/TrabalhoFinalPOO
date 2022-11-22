@@ -6,6 +6,7 @@ import Livros.Livro;
 import Livros.LivroFisico;
 import Enum.TipoCapa;
 import Livros.LivroVirtual;
+import Livros.Autor;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;
@@ -22,6 +23,21 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
     private final Scanner entrada = new Scanner(System.in);
     List<Livro> carrinho = new ArrayList<>();
 
+    private LocalDate DataNasc(){
+        System.out.println("Digite o ano de nascimento do autor: ");
+        int ano = entrada.nextInt();
+
+        System.out.println("Digite o mes de nascimento do autor: ");
+        int mes = entrada.nextInt();
+
+        System.out.println("Digite o dia de nascimento do autor: ");
+        int dia = entrada.nextInt();
+
+        LocalDate dataNasc = LocalDate.of(ano, mes, dia);
+
+        return dataNasc;
+    }
+
     @Override
     public void AdicionarLivro()
     {
@@ -36,6 +52,13 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
 
         System.out.println("Digite o preço do livro !");
         double preco = entrada.nextDouble();
+
+        entrada.nextLine();
+
+        System.out.println("Digite o nome do autor: ");
+        String nome_a = entrada.nextLine();
+
+        Autor a = new Autor(nome_a, DataNasc());
 
         entrada.nextLine();
 
@@ -62,9 +85,9 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
             tipoCapa = TipoCapa.Dura;
 
         if(tipoLivro == 1)
-            carrinho.add(new LivroFisico(titulo,editora,isbn,preco,LocalDate.of(ano,mes,dia),tipoCapa));
+            carrinho.add(new LivroFisico(titulo,editora,isbn,preco,LocalDate.of(ano,mes,dia),tipoCapa, a));
         else
-            carrinho.add(new LivroVirtual(titulo,editora,isbn,preco,LocalDate.of(ano,mes,dia)));
+            carrinho.add(new LivroVirtual(titulo,editora,isbn,preco,LocalDate.of(ano,mes,dia), a));
     }
 
     @Override
@@ -149,10 +172,17 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
 
                     case 5 ->
                     {
-                        System.out.println("Digite a nova data no formato (dd-mm-yyyy) !");
-                        String data = entrada.nextLine();
+                        System.out.println("Digite o dia de lançamento do livro !");
+                        int n_dia = entrada.nextInt();
 
-                        livro.setDataPublicacao(LocalDate.parse(data));
+                        System.out.println("Digite o mês de lançamento do livro !");
+                        int n_mes = entrada.nextInt();
+
+                        System.out.println("Digite o ano de lançamento do livro !");
+                        int n_ano = entrada.nextInt();
+
+                        LocalDate n_dataL = LocalDate.of(n_ano, n_mes, n_dia);
+                        livro.setDataPublicacao(n_dataL);
                     }
 
                     default ->

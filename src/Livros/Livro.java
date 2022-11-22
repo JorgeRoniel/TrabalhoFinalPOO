@@ -20,12 +20,13 @@ public abstract class Livro {
     }
 
     public Livro(String titulo, String editora, String isbn, Double preco,
-                 LocalDate dataPublicacao) {
+                 LocalDate dataPublicacao, Autor autor) {
         this.titulo = titulo;
         this.editora = editora;
         this.isbn = isbn;
         this.preco = preco;
         this.dataPublicacao = dataPublicacao;
+        this.autor = autor;
     }
 
     public void setTitulo(String titulo) {

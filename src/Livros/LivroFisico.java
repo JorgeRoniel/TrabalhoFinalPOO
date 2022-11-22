@@ -7,8 +7,8 @@ import Enum.TipoCapa;
 public class LivroFisico extends Livro {
     private TipoCapa tipoCapa; //Capa Flexível ou Capa Dura
     public LivroFisico(String titulo, String editora, String isbn, Double preco,
-                       LocalDate dataPublicacao, TipoCapa tipoCapa) {
-        super(titulo, editora, isbn,preco, dataPublicacao);
+                       LocalDate dataPublicacao, TipoCapa tipoCapa, Autor autor) {
+        super(titulo, editora, isbn,preco, dataPublicacao, autor);
 
         this.tipoCapa = tipoCapa;
     }

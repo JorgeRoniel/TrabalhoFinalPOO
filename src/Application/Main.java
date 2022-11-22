@@ -37,10 +37,8 @@ public class Main {
     }
     public static void main(String[] args) throws Excessao
     {
-        /* Fiz a lógica para adicionar ao carrinho e cobrança
-            Falta fazer a lógica para tratamento de erros
-
-            Inserir a lógica para o autor também está faltando, faz aí.
+        /* Fiz a parte do autor, e corrigi um erro na atualização do livro, falta colocar pra atualizar o autor tambem
+        e fazer a parte do tratamento de excessão
          */
 
         Menu();
