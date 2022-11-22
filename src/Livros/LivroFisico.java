@@ -13,8 +13,18 @@ public class LivroFisico extends Livro {
         this.tipoCapa = tipoCapa;
     }
 
+    public TipoCapa getCapa()
+    {
+        return this.tipoCapa;
+    }
+
     @Override
     public String toString() {
-        return "LivroFisico{}";
+        return "\nTítulo do livro: " +getTitulo() +"\n" +
+                "Código ISBN: " +getIsbn() + "\n " +
+                "Editora: " + getEditora() + "\n" +
+                "Preço: " +getPreco() + "\n" +
+                "Data da publicação: " + getDataPublicacao() + "\n" +
+                "Tipo da capa: " + getCapa().toString();
     }
 }

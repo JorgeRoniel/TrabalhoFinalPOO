@@ -1,16 +1,23 @@
 package Carrinho_Livros;
 
+import Exceptions.Excessao;
+import Interfaces.IJuros;
 import Livros.Livro;
 import Livros.LivroFisico;
 import Enum.TipoCapa;
 import Livros.LivroVirtual;
 
+import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
-public class Carrinho implements Interfaces.ICarrinho
+public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Interfaces.IJuros
 {
     private final Scanner entrada = new Scanner(System.in);
     List<Livro> carrinho = new ArrayList<>();
@@ -55,14 +62,153 @@ public class Carrinho implements Interfaces.ICarrinho
     }
 
     @Override
-    public void RemoverLivro(Livro livro)
+    public void RemoverLivro()
     {
-        carrinho.remove(livro);
+        int i = 0;
+
+        for(Livro livro: carrinho)
+        {
+            System.out.println(livro.getTitulo() + " " + livro.getPreco());
+            System.out.print(" - " + i);
+        }
+
+        System.out.println("Digite o índice do livro que você quer remover !");
+        short escolha = entrada.nextShort();
+
+        carrinho.remove(escolha);
     }
 
     @Override
-    public void AtualizarLivro(Livro livro, int escolha)
+    public void AtualizarLivro()
     {
+        int i = 0;
 
+        for(Livro livro: carrinho)
+        {
+            System.out.println(livro.getTitulo() + " " + livro.getPreco());
+            System.out.print(" - " + i);
+        }
+
+        System.out.println("Digite o índice do livro que você quer atualizar !");
+        short indice = entrada.nextShort();
+
+        for (Livro livro : carrinho)
+        {
+            if (i == indice)
+            {
+                System.out.println("Digite o índice do livro que você quer atualizar !");
+                short escolha = entrada.nextShort();
+
+                System.out.println("O que você deseja atualizar ?");
+                System.out.println("Digite 1 para título !");
+                System.out.println("Digite 2 para ISBN !");
+                System.out.println("Digite 3 para Editora !");
+                System.out.println("Digite 4 para o preço !");
+                System.out.println("Digite 5 para data de publicação !");
+
+                short opcao = entrada.nextShort();
+
+                switch (opcao) {
+                    case 1 ->
+                    {
+                        System.out.println("Digite o novo título !");
+                        String titulo = entrada.nextLine();
+
+                        livro.setTitulo(titulo);
+                    }
+
+                    case 2 ->
+                    {
+                        System.out.println("Digite o novo ISBN !");
+                        String isbn = entrada.nextLine();
+
+                        livro.setIsbn(isbn);
+                    }
+
+                    case 3 ->
+                    {
+                        System.out.println("Digite a nova editora !");
+                        String editora = entrada.nextLine();
+
+                        livro.setEditora(editora);
+                    }
+
+                    case 4 ->
+                    {
+                        System.out.println("Digite o novo preço !");
+                        Double preco = entrada.nextDouble();
+
+                        livro.setPreco(preco);
+                    }
+
+                    case 5 ->
+                    {
+                        System.out.println("Digite a nova data no formato (dd-mm-yyyy) !");
+                        String data = entrada.nextLine();
+
+                        livro.setDataPublicacao(LocalDate.parse(data));
+                    }
+
+                    default ->
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+    }
+    @Override
+    public double getPrecoDesconto(double preco) throws Excessao
+    {
+        if(preco<= 0)
+            throw new Excessao(preco);
+
+        return preco * 0.85;  // 15% de desconto !
+    }
+
+    @Override
+    public double getPrecoComJuros(double preco, int quantidadeParcelas) {
+        return IJuros.super.PrecoComJuros(preco, quantidadeParcelas);
+    }
+
+    @Override
+    public void CheckOut() throws Excessao {
+        double soma = 0;
+        double precoFinal = 0;
+
+        Locale locale = new Locale("pt", "BR");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh-mm",locale);
+
+        for(Livro livro: carrinho)
+        {
+            if(livro instanceof LivroVirtual)
+                soma += getPrecoDesconto(livro.getPreco());
+            else
+                soma += livro.getPreco();
+        }
+
+        System.out.println("O total da compra foi de: " + soma + "\nComo você deseja pagar ? Digite 1 para pagamento " +
+                "à vista e 2 para pagamento parcelado !");
+
+        short pagamento = entrada.nextShort();
+
+        if(pagamento == 1)
+            precoFinal = getPrecoDesconto(soma);
+
+        else
+        {
+            System.out.println("Digite a quantidade de parcelas !");
+            short parcelas = entrada.nextShort();
+
+            precoFinal = getPrecoComJuros(soma,parcelas);
+        }
+
+        System.out.println("Digite 1 para finalizar a compra e 2 para cancelar !");
+        short escolha = entrada.nextShort();
+
+        if(escolha == 1)
+            System.out.println("Compra foi realizada com sucesso no dia "
+                    + LocalDateTime.now().format(dateTimeFormatter) +
+                " ! O preço final ficou em: " + NumberFormat.getInstance().format(precoFinal));
     }
 }

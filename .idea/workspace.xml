@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment="Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento e exceptions !">
+      <change afterPath="$PROJECT_DIR$/src/Interfaces/ICarrinho.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Application/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/ICarrinho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Livros/Autor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Livros/Autor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Livros/Livro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Livros/Livro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Livros/LivroFisico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Livros/LivroFisico.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Livros/LivroVirtual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Livros/LivroVirtual.java" afterDir="false" />
     </list>
@@ -25,6 +24,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -70,6 +75,7 @@
       <workItem from="1668794158359" duration="687000" />
       <workItem from="1668794876117" duration="7835000" />
       <workItem from="1668814405102" duration="2809000" />
+      <workItem from="1669124912627" duration="3074000" />
     </task>
     <task id="LOCAL-00001" summary="Adicionei a classe abstrata Livro.">
       <created>1668794946689</created>
@@ -113,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668806880825</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento e exceptions !">
+      <created>1669124950158</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1669124950158</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
