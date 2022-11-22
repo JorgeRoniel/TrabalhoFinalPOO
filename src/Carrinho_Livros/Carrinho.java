@@ -221,4 +221,20 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
                     " as " + LocalDateTime.now().getHour() + " horas e " + LocalDateTime.now().getMinute() + " minutos !" +
                 " O preço final ficou em: " + numberFormat.format(precoFinal));
     }
+
+    public void PesquisarLivro(String titulo){
+        for(int i = 0; i<carrinho.size(); i++){
+            if(this.carrinho.get(i).getTitulo().equals(titulo)){
+                System.out.println(this.carrinho.get(i));
+            }
+        }
+    }
+
+    public void Pesquisar_porPreco(Integer precoI, Integer precoF){
+        for(int i = 0; i < carrinho.size(); i++){
+            if(this.carrinho.get(i).getPreco() <= precoF && this.carrinho.get(i).getPreco() >= precoI){
+                System.out.println(this.carrinho.get(i));
+            }
+        }
+    }
 }
