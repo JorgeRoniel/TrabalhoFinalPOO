@@ -1,10 +1,7 @@
 package Application;
 
 import Carrinho_Livros.Carrinho;
-import Carrinho_Livros.Carrinho;
 import Exceptions.Excessao;
-import Livros.LivroFisico;
-import Livros.LivroVirtual;
 import java.util.Scanner;
 
 public class Main {

@@ -42,8 +42,14 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
         System.out.println("Digite 1 para livro físico e 2 para virtual !");
         short tipoLivro = entrada.nextShort();
 
-        System.out.println("Digite a data de lançamento do livro no formato (dd/mm/yy) !");
-        LocalDate data = LocalDate.parse(entrada.nextLine());
+        System.out.println("Digite o dia de lançamento do livro !");
+        int dia = entrada.nextInt();
+
+        System.out.println("Digite o mês de lançamento do livro !");
+        int mes = entrada.nextInt();
+
+        System.out.println("Digite o ano de lançamento do livro !");
+        int ano = entrada.nextInt();
 
         System.out.println("Digite 1 para capa flexível e 2 para capa dura !");
         short tipo = entrada.nextShort();
@@ -56,9 +62,9 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
             tipoCapa = TipoCapa.Dura;
 
         if(tipoLivro == 1)
-            carrinho.add(new LivroFisico(titulo,editora,isbn,preco,data,tipoCapa));
+            carrinho.add(new LivroFisico(titulo,editora,isbn,preco,LocalDate.of(ano,mes,dia),tipoCapa));
         else
-            carrinho.add(new LivroVirtual(titulo,editora,isbn,preco,data));
+            carrinho.add(new LivroVirtual(titulo,editora,isbn,preco,LocalDate.of(ano,mes,dia)));
     }
 
     @Override
@@ -175,9 +181,9 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
     public void CheckOut() throws Excessao {
         double soma = 0;
         double precoFinal = 0;
-
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
         Locale locale = new Locale("pt", "BR");
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy hh-mm",locale);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy",locale);
 
         for(Livro livro: carrinho)
         {
@@ -187,13 +193,16 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
                 soma += livro.getPreco();
         }
 
-        System.out.println("O total da compra foi de: " + soma + "\nComo você deseja pagar ? Digite 1 para pagamento " +
+        System.out.println("O total da compra foi de: " + numberFormat.format(soma) + "\nComo você deseja pagar ? Digite 1 para pagamento " +
                 "à vista e 2 para pagamento parcelado !");
 
         short pagamento = entrada.nextShort();
 
         if(pagamento == 1)
+        {
+            System.out.println("Como você irá pagar à vista, iremos lhe dar um desconto de 15% !");
             precoFinal = getPrecoDesconto(soma);
+        }
 
         else
         {
@@ -208,7 +217,8 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
 
         if(escolha == 1)
             System.out.println("Compra foi realizada com sucesso no dia "
-                    + LocalDateTime.now().format(dateTimeFormatter) +
-                " ! O preço final ficou em: " + NumberFormat.getInstance().format(precoFinal));
+                    + LocalDate.now().format(dateTimeFormatter) +
+                    " as " + LocalDateTime.now().getHour() + " horas e " + LocalDateTime.now().getMinute() + " minutos !" +
+                " O preço final ficou em: " + numberFormat.format(precoFinal));
     }
 }
