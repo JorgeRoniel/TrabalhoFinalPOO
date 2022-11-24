@@ -41,53 +41,58 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
     @Override
     public void AdicionarLivro()
     {
-        System.out.println("Digite o titulo do livro !");
-        String titulo = entrada.nextLine();
+        try{
+            entrada.nextLine();
+            System.out.println("Digite o titulo do livro !");
+            String titulo = entrada.nextLine();
 
-        System.out.println("Digite o ISBN do livro !");
-        String isbn = entrada.nextLine();
+            System.out.println("Digite o ISBN do livro !");
+            String isbn = entrada.nextLine();
 
-        System.out.println("Digite o nome da editora !");
-        String editora = entrada.nextLine();
+            System.out.println("Digite o nome da editora !");
+            String editora = entrada.nextLine();
 
-        System.out.println("Digite o preço do livro !");
-        double preco = entrada.nextDouble();
+            System.out.println("Digite o preço do livro !");
+            double preco = entrada.nextDouble();
 
-        entrada.nextLine();
+            entrada.nextLine();
 
-        System.out.println("Digite o nome do autor: ");
-        String nome_a = entrada.nextLine();
+            System.out.println("Digite o nome do autor: ");
+            String nome_a = entrada.nextLine();
 
-        Autor a = new Autor(nome_a, DataNasc());
+            Autor a = new Autor(nome_a, DataNasc());
 
-        entrada.nextLine();
+            entrada.nextLine();
 
-        System.out.println("Digite 1 para livro físico e 2 para virtual !");
-        short tipoLivro = entrada.nextShort();
+            System.out.println("Digite 1 para livro físico e 2 para virtual !");
+            short tipoLivro = entrada.nextShort();
 
-        System.out.println("Digite o dia de lançamento do livro !");
-        int dia = entrada.nextInt();
+            System.out.println("Digite o dia de lançamento do livro !");
+            int dia = entrada.nextInt();
 
-        System.out.println("Digite o mês de lançamento do livro !");
-        int mes = entrada.nextInt();
+            System.out.println("Digite o mês de lançamento do livro !");
+            int mes = entrada.nextInt();
 
-        System.out.println("Digite o ano de lançamento do livro !");
-        int ano = entrada.nextInt();
+            System.out.println("Digite o ano de lançamento do livro !");
+            int ano = entrada.nextInt();
 
-        System.out.println("Digite 1 para capa flexível e 2 para capa dura !");
-        short tipo = entrada.nextShort();
+            if(tipoLivro == 1) {
+                System.out.println("Digite 1 para capa flexível e 2 para capa dura !");
+                short tipo = entrada.nextShort();
 
-        TipoCapa tipoCapa;
+                TipoCapa tipoCapa;
 
-        if(tipo == 1)
-            tipoCapa = TipoCapa.Flexivel;
-        else
-            tipoCapa = TipoCapa.Dura;
-
-        if(tipoLivro == 1)
-            carrinho.add(new LivroFisico(titulo,editora,isbn,preco,LocalDate.of(ano,mes,dia),tipoCapa, a));
-        else
-            carrinho.add(new LivroVirtual(titulo,editora,isbn,preco,LocalDate.of(ano,mes,dia), a));
+                if (tipo == 1)
+                    tipoCapa = TipoCapa.Flexivel;
+                else
+                    tipoCapa = TipoCapa.Dura;
+                carrinho.add(new LivroFisico(titulo, editora, isbn, preco, LocalDate.of(ano, mes, dia), tipoCapa, a));
+            }else if(tipoLivro == 2) {
+                carrinho.add(new LivroVirtual(titulo, editora, isbn, preco, LocalDate.of(ano, mes, dia), a));
+            }
+        }catch (Exception e){
+            System.out.println("Houve um erro na cadastro/compra do Livro, tente novamente!");
+        }
     }
 
     @Override
@@ -118,79 +123,96 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
             System.out.print(" - " + i);
         }
 
-        System.out.println("Digite o índice do livro que você quer atualizar !");
-        short indice = entrada.nextShort();
+        try{
+            System.out.println("Digite o índice do livro que você quer atualizar !");
+            short indice = entrada.nextShort();
 
-        for (Livro livro : carrinho)
-        {
-            if (i == indice)
+            for (Livro livro : carrinho)
             {
-                System.out.println("Digite o índice do livro que você quer atualizar !");
-                short escolha = entrada.nextShort();
+                if (i == indice)
+                {
+                    System.out.println("Digite o índice do livro que você quer atualizar !");
+                    short escolha = entrada.nextShort();
 
-                System.out.println("O que você deseja atualizar ?");
-                System.out.println("Digite 1 para título !");
-                System.out.println("Digite 2 para ISBN !");
-                System.out.println("Digite 3 para Editora !");
-                System.out.println("Digite 4 para o preço !");
-                System.out.println("Digite 5 para data de publicação !");
+                    System.out.println("O que você deseja atualizar ?");
+                    System.out.println("Digite 1 para título !");
+                    System.out.println("Digite 2 para ISBN !");
+                    System.out.println("Digite 3 para Editora !");
+                    System.out.println("Digite 4 para o preço !");
+                    System.out.println("Digite 5 para o Autor !");
+                    System.out.println("Digite 6 para data de publicação !");
 
-                short opcao = entrada.nextShort();
+                    short opcao = entrada.nextShort();
 
-                switch (opcao) {
-                    case 1 ->
-                    {
-                        System.out.println("Digite o novo título !");
-                        String titulo = entrada.nextLine();
+                    switch (opcao) {
+                        case 1 ->
+                        {
+                            System.out.println("Digite o novo título !");
+                            String titulo = entrada.nextLine();
 
-                        livro.setTitulo(titulo);
-                    }
+                            livro.setTitulo(titulo);
+                            entrada.nextLine();
+                        }
 
-                    case 2 ->
-                    {
-                        System.out.println("Digite o novo ISBN !");
-                        String isbn = entrada.nextLine();
+                        case 2 ->
+                        {
+                            System.out.println("Digite o novo ISBN !");
+                            String isbn = entrada.nextLine();
 
-                        livro.setIsbn(isbn);
-                    }
+                            livro.setIsbn(isbn);
+                            entrada.nextLine();
+                        }
 
-                    case 3 ->
-                    {
-                        System.out.println("Digite a nova editora !");
-                        String editora = entrada.nextLine();
+                        case 3 ->
+                        {
+                            System.out.println("Digite a nova editora !");
+                            String editora = entrada.nextLine();
 
-                        livro.setEditora(editora);
-                    }
+                            livro.setEditora(editora);
+                            entrada.nextLine();
+                        }
 
-                    case 4 ->
-                    {
-                        System.out.println("Digite o novo preço !");
-                        Double preco = entrada.nextDouble();
+                        case 4 ->
+                        {
+                            System.out.println("Digite o novo preço !");
+                            Double preco = entrada.nextDouble();
 
-                        livro.setPreco(preco);
-                    }
+                            livro.setPreco(preco);
+                        }
 
-                    case 5 ->
-                    {
-                        System.out.println("Digite o dia de lançamento do livro !");
-                        int n_dia = entrada.nextInt();
+                        case 5 ->
+                        {
+                            System.out.println("Digite o nome do autor: ");
+                            String n_nomeA = entrada.nextLine();
 
-                        System.out.println("Digite o mês de lançamento do livro !");
-                        int n_mes = entrada.nextInt();
+                            Autor n_Autor = new Autor(n_nomeA, DataNasc());
+                            entrada.nextLine();
+                        }
 
-                        System.out.println("Digite o ano de lançamento do livro !");
-                        int n_ano = entrada.nextInt();
+                        case 6 ->
+                        {
+                            System.out.println("Digite o dia de lançamento do livro !");
+                            int n_dia = entrada.nextInt();
 
-                        LocalDate n_dataL = LocalDate.of(n_ano, n_mes, n_dia);
-                        livro.setDataPublicacao(n_dataL);
-                    }
+                            System.out.println("Digite o mês de lançamento do livro !");
+                            int n_mes = entrada.nextInt();
 
-                    default ->
-                    {
-                        return;
+                            System.out.println("Digite o ano de lançamento do livro !");
+                            int n_ano = entrada.nextInt();
+
+                            LocalDate n_dataL = LocalDate.of(n_ano, n_mes, n_dia);
+                            livro.setDataPublicacao(n_dataL);
+                        }
+
+                        default ->
+                        {
+                            return;
+                        }
                     }
                 }
             }
+        }catch (Exception e){
+            System.out.println("Houve um erro na atualizacao do Livro, tente novamente!");
         }
     }
     @Override
