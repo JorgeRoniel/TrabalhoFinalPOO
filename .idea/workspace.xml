@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment="Programa ja esta cadastrando o autor e corrigi um erro na atualização do livro">
+    <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment="Tratamento de excessões adicionados">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Application/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Livros/LivroFisico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Livros/LivroFisico.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Livros/LivroVirtual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Livros/LivroVirtual.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +146,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669138565283</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Tratamento de excessões adicionados">
+      <created>1669252139405</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1669252139405</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,7 +177,8 @@
     <MESSAGE value="Programa quase concluído. Falta fazer tratamento de erros." />
     <MESSAGE value="Pequena atualização de terça" />
     <MESSAGE value="Programa ja esta cadastrando o autor e corrigi um erro na atualização do livro" />
-    <option name="LAST_COMMIT_MESSAGE" value="Programa ja esta cadastrando o autor e corrigi um erro na atualização do livro" />
+    <MESSAGE value="Tratamento de excessões adicionados" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tratamento de excessões adicionados" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

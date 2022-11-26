@@ -274,19 +274,44 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
                 " O preço final ficou em: " + numberFormat.format(precoFinal));
     }
 
-    public void PesquisarLivro(String titulo){
-        for(int i = 0; i<carrinho.size(); i++){
-            if(this.carrinho.get(i).getTitulo().equals(titulo)){
-                System.out.println(this.carrinho.get(i));
+    public void Pesquisar(){
+        System.out.println("Como voce deseja fazer a pesquisa?\n 1 - Pelo titulo\n 2 - Pelo intervalo do preco\n");
+        int esc = entrada.nextInt();
+
+        entrada.nextLine();
+
+        if(esc == 1){
+
+            System.out.println("Digite o titulo do livro: ");
+            String titulo = entrada.nextLine();
+
+            for(int i = 0; i<carrinho.size(); i++){
+                if(this.carrinho.get(i).getTitulo().equals(titulo)){
+                    System.out.println(this.carrinho.get(i));
+                }else{
+                    System.out.println("Livro nao encontrado");
+                    break;
+                }
             }
+        }else if(esc == 2){
+
+            System.out.println("Digite o preco inicial do livro: ");
+            Double precoI = entrada.nextDouble();
+
+            System.out.println("Digite o preco final do livro: ");
+            Double precoF = entrada.nextDouble();
+
+            for(int i = 0; i < carrinho.size(); i++){
+                if(this.carrinho.get(i).getPreco() <= precoF && this.carrinho.get(i).getPreco() >= precoI){
+                    System.out.println(this.carrinho.get(i));
+                }else{
+                    System.out.println("Livro nao encontrado");
+                    break;
+                }
+            }
+        }else{
+            System.out.println("Valor de escolha invalido");
         }
     }
 
-    public void Pesquisar_porPreco(Integer precoI, Integer precoF){
-        for(int i = 0; i < carrinho.size(); i++){
-            if(this.carrinho.get(i).getPreco() <= precoF && this.carrinho.get(i).getPreco() >= precoI){
-                System.out.println(this.carrinho.get(i));
-            }
-        }
-    }
 }
