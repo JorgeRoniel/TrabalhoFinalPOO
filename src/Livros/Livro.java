@@ -3,8 +3,10 @@ package Livros;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import Enum.Categoria;
 
-public abstract class Livro {
+public abstract class Livro
+{
     private static final Locale locale = new Locale("pt","BR");
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy",locale);
     private String titulo;
@@ -12,21 +14,24 @@ public abstract class Livro {
     private String isbn;
     private Double preco;
     private LocalDate dataPublicacao;
-
+    private short edicao;
+    private Categoria categoria;
     private Autor autor = new Autor();
 
-    public Livro() {
+    public Livro()
+    {
 
     }
 
     public Livro(String titulo, String editora, String isbn, Double preco,
-                 LocalDate dataPublicacao, Autor autor) {
+                 LocalDate dataPublicacao, Autor autor, Categoria categoria) {
         this.titulo = titulo;
         this.editora = editora;
         this.isbn = isbn;
         this.preco = preco;
         this.dataPublicacao = dataPublicacao;
         this.autor = autor;
+        this.categoria = categoria;
     }
 
     public void setTitulo(String titulo) {
@@ -72,4 +77,11 @@ public abstract class Livro {
     public String getDataPublicacao() {
         return formatter.format(dataPublicacao);
     }
+
+    public Categoria getCategoria() { return categoria;}
+
+    public String getNomeAutor() { return autor.getNome();}
+
+    public String getDataNascimentoAutor()
+    { return autor.getDataNascimento();}
 }

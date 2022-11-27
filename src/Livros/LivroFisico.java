@@ -1,14 +1,14 @@
 package Livros;
 
 import java.time.LocalDate;
-import java.util.GregorianCalendar;
-import Enum.TipoCapa;
+import Enum.*;
 
 public class LivroFisico extends Livro {
     private TipoCapa tipoCapa; //Capa Flexível ou Capa Dura
     public LivroFisico(String titulo, String editora, String isbn, Double preco,
-                       LocalDate dataPublicacao, TipoCapa tipoCapa, Autor autor) {
-        super(titulo, editora, isbn,preco, dataPublicacao, autor);
+                       LocalDate dataPublicacao, TipoCapa tipoCapa, Autor autor, Categoria categoria)
+    {
+        super(titulo, editora,isbn,preco, dataPublicacao,autor,categoria);
 
         this.tipoCapa = tipoCapa;
     }
@@ -24,8 +24,11 @@ public class LivroFisico extends Livro {
                 "Tipo do livro: Fisico\n"+
                 "Código ISBN: " +getIsbn() + "\n " +
                 "Editora: " + getEditora() + "\n" +
+                "Nome do autor: " + getNomeAutor() + "\n" +
+                "Data de nascimento do autor: " + getDataNascimentoAutor() + "\n" +
                 "Preço: " +getPreco() + "\n" +
                 "Data da publicação: " + getDataPublicacao() + "\n" +
-                "Tipo da capa: " + getCapa().toString();
+                "Tipo da capa: " + getCapa().toString() + "\n" +
+                "Categoria " + getCategoria();
     }
 }

@@ -2,19 +2,21 @@ package Application;
 
 import Carrinho_Livros.Carrinho;
 import Exceptions.Excessao;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Main {
-
+public class Main
+{
     public static Scanner entrada = new Scanner(System.in);
 
     public static void Menu() throws Excessao
     {
         Carrinho carrinho = new Carrinho();
 
-        while(true)
+        try
         {
-            try{
+            while (true)
+            {
                 System.out.println("-------------------------------------------------------------------");
                 System.out.println("Digite 1 para ADICIONAR um livro !");
                 System.out.println("Digite 2 para REMOVER um livro !");
@@ -26,7 +28,7 @@ public class Main {
 
                 int escolha = entrada.nextInt();
 
-                switch(escolha)
+                switch (escolha)
                 {
                     case 1 -> carrinho.AdicionarLivro();
                     case 2 -> carrinho.RemoverLivro();
@@ -36,21 +38,21 @@ public class Main {
                     case 6 -> System.exit(0);
                     default -> Menu();
                 }
-            }catch (Exception e){
-                System.out.println("O valor digitado e invalido, tente novamente!");
-                break;
             }
+        }
+        catch (InputMismatchException e)
+        {
+            System.out.println("Dados inválidos !");
         }
     }
     public static void main(String[] args) throws Excessao
     {
         /*
-        Fiz a parte de tratamento de erros, cadastro e atualização de autor e a função de pesquisa, porem
-        tem um bug na parte de pesquisa por titulo, mas deixa que depois eu arrumo
+            Fiz mais uma parte de tratamento de erros. Devido a testes, vi que também lançava excessões de datas.
 
-        fica pra tu fazer a parte de imprimir os livros, de acordo como o professor pediu no pdf
+            Então também fiz tratamento de excessões para datas.
 
-        caso tu queira fazer alguma alteração nos tratamentos de erros, pode fazer
+            Fiz algumas Alterações para o autor
          */
 
         Menu();

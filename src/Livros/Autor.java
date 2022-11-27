@@ -12,7 +12,9 @@ public class Autor
     private String nome;
     private LocalDate dataNascimento;
 
-    public Autor() {
+    public Autor()
+    {
+
     }
 
     public Autor(String nome, LocalDate dataNascimento)

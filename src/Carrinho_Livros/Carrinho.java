@@ -1,29 +1,26 @@
 package Carrinho_Livros;
 
 import Exceptions.Excessao;
-import Interfaces.IJuros;
 import Livros.Livro;
 import Livros.LivroFisico;
-import Enum.TipoCapa;
+import Enum.*;
 import Livros.LivroVirtual;
 import Livros.Autor;
-
-import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Interfaces.IJuros
 {
     private final Scanner entrada = new Scanner(System.in);
     List<Livro> carrinho = new ArrayList<>();
 
-    private LocalDate DataNasc(){
+    private LocalDate RecebeDataNascimento()
+    {
+
         System.out.println("Digite o ano de nascimento do autor: ");
         int ano = entrada.nextInt();
 
@@ -33,16 +30,14 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
         System.out.println("Digite o dia de nascimento do autor: ");
         int dia = entrada.nextInt();
 
-        LocalDate dataNasc = LocalDate.of(ano, mes, dia);
-
-        return dataNasc;
+        return LocalDate.of(ano, mes, dia);
     }
 
     @Override
-    public void AdicionarLivro()
+    public void AdicionarLivro() throws InputMismatchException, DateTimeException
     {
-        try{
-            entrada.nextLine();
+        try
+        {
             System.out.println("Digite o titulo do livro !");
             String titulo = entrada.nextLine();
 
@@ -58,9 +53,9 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
             entrada.nextLine();
 
             System.out.println("Digite o nome do autor: ");
-            String nome_a = entrada.nextLine();
+            String nomeAutor = entrada.nextLine();
 
-            Autor a = new Autor(nome_a, DataNasc());
+            Autor autor = new Autor(nomeAutor, RecebeDataNascimento());
 
             entrada.nextLine();
 
@@ -76,22 +71,33 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
             System.out.println("Digite o ano de lançamento do livro !");
             int ano = entrada.nextInt();
 
-            if(tipoLivro == 1) {
-                System.out.println("Digite 1 para capa flexível e 2 para capa dura !");
-                short tipo = entrada.nextShort();
+            Excessao.ValidarData(ano,mes,dia);
 
-                TipoCapa tipoCapa;
+            System.out.println("Digite 1 para capa flexível e 2 para capa dura !");
+            short tipo = entrada.nextShort();
 
-                if (tipo == 1)
-                    tipoCapa = TipoCapa.Flexivel;
-                else
-                    tipoCapa = TipoCapa.Dura;
-                carrinho.add(new LivroFisico(titulo, editora, isbn, preco, LocalDate.of(ano, mes, dia), tipoCapa, a));
-            }else if(tipoLivro == 2) {
-                carrinho.add(new LivroVirtual(titulo, editora, isbn, preco, LocalDate.of(ano, mes, dia), a));
-            }
-        }catch (Exception e){
-            System.out.println("Houve um erro na cadastro/compra do Livro, tente novamente!");
+            TipoCapa tipoCapa;
+
+            if (tipo == 1)
+                tipoCapa = TipoCapa.Flexivel;
+            else
+                tipoCapa = TipoCapa.Dura;
+
+            if (tipoLivro == 1)
+                carrinho.add(new LivroFisico(titulo, editora, isbn, preco,
+                        LocalDate.of(ano, mes, dia), tipoCapa, autor,Categoria.valueOf("5")));
+            else
+                carrinho.add(new LivroVirtual(titulo, editora, isbn, preco,
+                        LocalDate.of(ano, mes, dia), autor, Categoria.valueOf("6")));
+
+        }
+        catch (DateTimeException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        catch (InputMismatchException e)
+        {
+            System.out.println("Dados informados são inválidos !");
         }
     }
 
@@ -121,105 +127,88 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
         {
             System.out.println(livro.getTitulo() + " " + livro.getPreco());
             System.out.print(" - " + i);
+            i++;
         }
 
-        try{
-            System.out.println("Digite o índice do livro que você quer atualizar !");
-            short indice = entrada.nextShort();
+        System.out.println("Digite o índice do livro que você quer atualizar !");
+        short indice = entrada.nextShort();
 
-            for (Livro livro : carrinho)
+        for (Livro livro : carrinho)
+        {
+            if (i == indice)
             {
-                if (i == indice)
-                {
-                    System.out.println("Digite o índice do livro que você quer atualizar !");
-                    short escolha = entrada.nextShort();
+                System.out.println("Digite o índice do livro que você quer atualizar !");
+                short escolha = entrada.nextShort();
 
-                    System.out.println("O que você deseja atualizar ?");
-                    System.out.println("Digite 1 para título !");
-                    System.out.println("Digite 2 para ISBN !");
-                    System.out.println("Digite 3 para Editora !");
-                    System.out.println("Digite 4 para o preço !");
-                    System.out.println("Digite 5 para o Autor !");
-                    System.out.println("Digite 6 para data de publicação !");
+                System.out.println("O que você deseja atualizar ?");
+                System.out.println("Digite 1 para título !");
+                System.out.println("Digite 2 para ISBN !");
+                System.out.println("Digite 3 para Editora !");
+                System.out.println("Digite 4 para o preço !");
+                System.out.println("Digite 5 para data de publicação !");
 
-                    short opcao = entrada.nextShort();
+                short opcao = entrada.nextShort();
 
-                    switch (opcao) {
-                        case 1 ->
-                        {
-                            System.out.println("Digite o novo título !");
-                            String titulo = entrada.nextLine();
+                switch (opcao) {
+                    case 1 ->
+                    {
+                        System.out.println("Digite o novo título !");
+                        String titulo = entrada.nextLine();
 
-                            livro.setTitulo(titulo);
-                            entrada.nextLine();
-                        }
+                        livro.setTitulo(titulo);
+                    }
 
-                        case 2 ->
-                        {
-                            System.out.println("Digite o novo ISBN !");
-                            String isbn = entrada.nextLine();
+                    case 2 ->
+                    {
+                        System.out.println("Digite o novo ISBN !");
+                        String isbn = entrada.nextLine();
 
-                            livro.setIsbn(isbn);
-                            entrada.nextLine();
-                        }
+                        livro.setIsbn(isbn);
+                    }
 
-                        case 3 ->
-                        {
-                            System.out.println("Digite a nova editora !");
-                            String editora = entrada.nextLine();
+                    case 3 ->
+                    {
+                        System.out.println("Digite a nova editora !");
+                        String editora = entrada.nextLine();
 
-                            livro.setEditora(editora);
-                            entrada.nextLine();
-                        }
+                        livro.setEditora(editora);
+                    }
 
-                        case 4 ->
-                        {
-                            System.out.println("Digite o novo preço !");
-                            Double preco = entrada.nextDouble();
+                    case 4 ->
+                    {
+                        System.out.println("Digite o novo preço !");
+                        Double preco = entrada.nextDouble();
 
-                            livro.setPreco(preco);
-                        }
+                        livro.setPreco(preco);
+                    }
 
-                        case 5 ->
-                        {
-                            System.out.println("Digite o nome do autor: ");
-                            String n_nomeA = entrada.nextLine();
+                    case 5 ->
+                    {
+                        System.out.println("Digite o dia de lançamento do livro !");
+                        int n_dia = entrada.nextInt();
 
-                            Autor n_Autor = new Autor(n_nomeA, DataNasc());
-                            entrada.nextLine();
-                        }
+                        System.out.println("Digite o mês de lançamento do livro !");
+                        int n_mes = entrada.nextInt();
 
-                        case 6 ->
-                        {
-                            System.out.println("Digite o dia de lançamento do livro !");
-                            int n_dia = entrada.nextInt();
+                        System.out.println("Digite o ano de lançamento do livro !");
+                        int n_ano = entrada.nextInt();
 
-                            System.out.println("Digite o mês de lançamento do livro !");
-                            int n_mes = entrada.nextInt();
+                        LocalDate n_dataL = LocalDate.of(n_ano, n_mes, n_dia);
+                        livro.setDataPublicacao(n_dataL);
+                    }
 
-                            System.out.println("Digite o ano de lançamento do livro !");
-                            int n_ano = entrada.nextInt();
-
-                            LocalDate n_dataL = LocalDate.of(n_ano, n_mes, n_dia);
-                            livro.setDataPublicacao(n_dataL);
-                        }
-
-                        default ->
-                        {
-                            return;
-                        }
+                    default ->
+                    {
+                        return;
                     }
                 }
             }
-        }catch (Exception e){
-            System.out.println("Houve um erro na atualizacao do Livro, tente novamente!");
         }
     }
     @Override
     public double getPrecoDesconto(double preco) throws Excessao
     {
-        if(preco<= 0)
-            throw new Excessao(preco);
+        Excessao.ValidarPreco(preco);
 
         return preco * 0.85;  // 15% de desconto !
     }
@@ -230,9 +219,11 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
     }
 
     @Override
-    public void CheckOut() throws Excessao {
+    public void CheckOut() throws Excessao
+    {
         double soma = 0;
         double precoFinal = 0;
+
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
         Locale locale = new Locale("pt", "BR");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy",locale);
@@ -245,8 +236,8 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
                 soma += livro.getPreco();
         }
 
-        System.out.println("O total da compra foi de: " + numberFormat.format(soma) + "\nComo você deseja pagar ? Digite 1 para pagamento " +
-                "à vista e 2 para pagamento parcelado !");
+        System.out.println("O total da compra foi de: " + numberFormat.format(soma) + "\nComo você deseja pagar ? " +
+                "Digite 1 para pagamento à vista e 2 para pagamento parcelado !");
 
         short pagamento = entrada.nextShort();
 
@@ -268,50 +259,44 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
         short escolha = entrada.nextShort();
 
         if(escolha == 1)
-            System.out.println("Compra foi realizada com sucesso no dia "
-                    + LocalDate.now().format(dateTimeFormatter) +
+            System.out.println("Compra foi realizada com sucesso no dia " + LocalDate.now().format(dateTimeFormatter) +
                     " as " + LocalDateTime.now().getHour() + " horas e " + LocalDateTime.now().getMinute() + " minutos !" +
                 " O preço final ficou em: " + numberFormat.format(precoFinal));
     }
 
-    public void Pesquisar(){
-        System.out.println("Como voce deseja fazer a pesquisa?\n 1 - Pelo titulo\n 2 - Pelo intervalo do preco\n");
-        int esc = entrada.nextInt();
-
-        entrada.nextLine();
-
-        if(esc == 1){
-
-            System.out.println("Digite o titulo do livro: ");
+    public void Pesquisar() throws InputMismatchException
+    {
+        try
+        {
+            System.out.println("Digite o título para pesquisa !");
             String titulo = entrada.nextLine();
 
-            for(int i = 0; i<carrinho.size(); i++){
-                if(this.carrinho.get(i).getTitulo().equals(titulo)){
-                    System.out.println(this.carrinho.get(i));
-                }else{
-                    System.out.println("Livro nao encontrado");
-                    break;
+            for (Livro livro : carrinho)
+            {
+                if (Objects.equals(titulo, livro.getTitulo()))
+                {
+                    System.out.println("Imprimindo os dados do livro.................");
+                    System.out.println(livro);
                 }
             }
-        }else if(esc == 2){
-
-            System.out.println("Digite o preco inicial do livro: ");
-            Double precoI = entrada.nextDouble();
-
-            System.out.println("Digite o preco final do livro: ");
-            Double precoF = entrada.nextDouble();
-
-            for(int i = 0; i < carrinho.size(); i++){
-                if(this.carrinho.get(i).getPreco() <= precoF && this.carrinho.get(i).getPreco() >= precoI){
-                    System.out.println(this.carrinho.get(i));
-                }else{
-                    System.out.println("Livro nao encontrado");
-                    break;
-                }
-            }
-        }else{
-            System.out.println("Valor de escolha invalido");
+        }
+        catch (InputMismatchException e)
+        {
+            System.out.println("Dados inválidos !");
         }
     }
 
+    public void PesquisarPorPreco(Integer precoInicial, Integer precoFinal) throws IllegalArgumentException
+    {
+        if(precoInicial <= 0 || precoFinal <= 0)
+            throw new IllegalArgumentException("Os preços informados são inválidos !");
+
+        for(Livro livro: carrinho)
+        {
+            if(livro.getPreco() <= precoFinal && livro.getPreco() >= precoInicial)
+            {
+                System.out.println(livro.getTitulo() + " -  R$: " + livro.getPreco());
+            }
+        }
+    }
 }
