@@ -3,13 +3,16 @@ package Application;
 import Carrinho_Livros.Carrinho;
 import Estoque.Estoque;
 import Exceptions.Excessao;
+
+import java.time.DateTimeException;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import Livros.*;
 
 public class Main
 {
-    public static Scanner entrada = new Scanner(System.in);
+    private static Scanner entrada = new Scanner(System.in);
 
     public static void MenuGeral() throws InputMismatchException
     {
@@ -22,7 +25,8 @@ public class Main
 
                 int escolha = entrada.nextInt();
 
-                switch (escolha) {
+                switch (escolha)
+                {
                     case 1 -> MenuEstoque();
                     case 2 -> MenuCarrinho();
                     default -> MenuGeral();
@@ -46,7 +50,9 @@ public class Main
                 System.out.println("Digite 1 para ADICIONAR um livro no ESTOQUE !");
                 System.out.println("Digite 2 para ATUAlIZAR um livro !");
                 System.out.println("Digite 3 para PESQUISAR um livro !");
-                System.out.println("Digite 4 para SAIR !");
+                System.out.println("Digite 4 para IMPRIMIR o valor TOTAL de produtos em ESTOQUE !");
+                System.out.println("Digite 5 para IMPRIMIR todos os PRODUTOS que estão em ESTOQUE !");
+                System.out.println("Digite 6 para SAIR !");
                 System.out.println("-------------------------------------------------------------------");
 
                 int escolha = entrada.nextInt();
@@ -54,7 +60,9 @@ public class Main
                 switch (escolha)
                 {
                     case 1 -> Estoque.CadastrarNovoLivro();
+
                     case 2 -> Estoque.AtualizarLivro();
+
                     case 3 ->
                     {
                         entrada.nextLine();
@@ -72,7 +80,11 @@ public class Main
                         else
                             System.out.println("Livro não encontrado !");
                     }
-                    case 4 ->
+                    case 4 -> System.out.println(Estoque.ValorTotalEmEstoque());
+
+                    case 5 -> Estoque.ImprimirEstoque();
+
+                    case 6 ->
                     {
                         return;
                     }
@@ -83,6 +95,10 @@ public class Main
         catch (InputMismatchException e)
         {
             System.out.println("Dados inválidos !");
+        }
+        catch (DateTimeException e)
+        {
+
         }
     }
     public static void MenuCarrinho() throws InputMismatchException
@@ -96,9 +112,9 @@ public class Main
                 System.out.println("-------------------------------------------------------------------");
                 System.out.println("Digite 1 para ADICIONAR um livro no CARRINHO!");
                 System.out.println("Digite 2 para REMOVER um livro do CARRINHO !");
-                System.out.println("Digite 4 para IMPRIMIR os LIVROS no CARRINHO !");
-                System.out.println("Digite 5 para TERMINAR a compra e ir para o PAGAMENTO !");
-                System.out.println("Digite 6 para SAIR !");
+                System.out.println("Digite 3 para IMPRIMIR os LIVROS no CARRINHO !");
+                System.out.println("Digite 4 para TERMINAR a compra e ir para o PAGAMENTO !");
+                System.out.println("Digite 5 para SAIR !");
                 System.out.println("-------------------------------------------------------------------");
 
                 int escolha = entrada.nextInt();
@@ -108,8 +124,8 @@ public class Main
                     case 1 -> carrinho.AdicionarLivroCarrinho();
                     case 2 -> carrinho.RemoverLivroCarrinho();
                     case 3 -> carrinho.ImprimirConteudoCarrinho();
-                    case 5 -> carrinho.CheckOut();
-                    case 6 ->
+                    case 4 -> carrinho.CheckOut();
+                    case 5 ->
                     {
                         return;
                     }

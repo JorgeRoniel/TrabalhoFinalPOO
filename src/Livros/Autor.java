@@ -1,7 +1,6 @@
 package Livros;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -32,8 +31,4 @@ public class Autor
         return dataNascimento.format(formatter);
     }
 
-    public int getIdade()
-    {
-        return Period.between(dataNascimento,LocalDate.now()).getYears();
-    }
 }

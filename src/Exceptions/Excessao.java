@@ -23,6 +23,12 @@ public class Excessao extends Exception
 
     }
 
+    public static void ValidarQuantidade(int quantidade)
+    {
+        if(quantidade <= 0 )
+            throw new IllegalArgumentException("A quantidade de livros não pode ser zero !");
+    }
+
     public static void ValidarData(int ano, int mes, int dia) throws DateTimeException
     {
         if(ano < 0)

@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment="Adicionei o Estoque mas falta muita coisa para ele ainda.">
+    <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment=" Fiz a parte do estoque. Falta fazer só a parte do tratamento de excessões e as categorias.&#10;&#10;O resto já ta tudo ok.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Application/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaces/ICarrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/ICarrinho.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Livros/Autor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Livros/Autor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Livros/Livro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Livros/Livro.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Livros/LivroFisico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Livros/LivroFisico.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +76,8 @@
       <workItem from="1669124912627" duration="3365000" />
       <workItem from="1669575427556" duration="4317000" />
       <workItem from="1669808788257" duration="1995000" />
-      <workItem from="1669811756843" duration="4818000" />
+      <workItem from="1669811756843" duration="5080000" />
+      <workItem from="1669831068583" duration="1551000" />
     </task>
     <task id="LOCAL-00001" summary="Adicionei a classe abstrata Livro.">
       <created>1668794946689</created>
@@ -158,7 +156,21 @@
       <option name="project" value="LOCAL" />
       <updated>1669810157571</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary=" Fiz a parte do estoque. Falta fazer só a parte do tratamento de excessões e as categorias.&#10;&#10;O resto já ta tudo ok.">
+      <created>1669817189038</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1669817189038</updated>
+    </task>
+    <task id="LOCAL-00013" summary=" Fiz a parte do estoque. Falta fazer só a parte do tratamento de excessões e as categorias.&#10;&#10;O resto já ta tudo ok.">
+      <created>1669817321460</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1669817321460</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,7 +195,8 @@
     <MESSAGE value="Pequena atualização de terça" />
     <MESSAGE value="Fiz mais uma parte de tratamento de erros.&#10;Devido a testes, vi que também lançava excessões de datas.&#10;            &#10;Então também fiz tratamento de excessões para datas.&#10;&#10;Fiz algumas Alterações para o autor" />
     <MESSAGE value="Adicionei o Estoque mas falta muita coisa para ele ainda." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicionei o Estoque mas falta muita coisa para ele ainda." />
+    <MESSAGE value=" Fiz a parte do estoque. Falta fazer só a parte do tratamento de excessões e as categorias.&#10;&#10;O resto já ta tudo ok." />
+    <option name="LAST_COMMIT_MESSAGE" value=" Fiz a parte do estoque. Falta fazer só a parte do tratamento de excessões e as categorias.&#10;&#10;O resto já ta tudo ok." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -19,10 +19,15 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
 
     public void ImprimirConteudoCarrinho()
     {
+        Double soma = 0D;
+
         for(Livro livro : carrinho)
         {
             System.out.println(livro.getTitulo() + " " + NumberFormat.getCurrencyInstance().format(livro.getPreco()));
+            soma += livro.getPreco();
         }
+
+        System.out.print("Total da compra até o momento: " + NumberFormat.getCurrencyInstance().format(soma));
     }
     @Override
     public void AdicionarLivroCarrinho() throws InputMismatchException, DateTimeException
