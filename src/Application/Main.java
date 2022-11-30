@@ -54,7 +54,7 @@ public class Main
                 switch (escolha)
                 {
                     case 1 -> Estoque.CadastrarNovoLivro();
-                    case 2 -> Estoque.CadastrarNovoLivro();
+                    case 2 -> Estoque.AtualizarLivro();
                     case 3 ->
                     {
                         entrada.nextLine();
