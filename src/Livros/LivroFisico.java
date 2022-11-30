@@ -4,12 +4,13 @@ import java.time.LocalDate;
 import Enum.*;
 
 public class LivroFisico extends Livro {
-    private TipoCapa tipoCapa; //Capa FlexÃ­vel ou Capa Dura
-    public LivroFisico(String titulo, String editora, String isbn, Double preco,
+    private TipoCapa tipoCapa; //Capa Flexível ou Capa Dura
+    private Integer quantidadeEstoque;
+    public LivroFisico(String titulo, String editora, String isbn, Double preco, Integer quantidadeEstoque,
                        LocalDate dataPublicacao, TipoCapa tipoCapa, Autor autor, Categoria categoria)
     {
         super(titulo, editora,isbn,preco, dataPublicacao,autor,categoria);
-
+        this.quantidadeEstoque = quantidadeEstoque;
         this.tipoCapa = tipoCapa;
     }
 
@@ -18,16 +19,26 @@ public class LivroFisico extends Livro {
         return this.tipoCapa;
     }
 
+    public Integer getQuantidadeEstoque()
+    {
+        return this.quantidadeEstoque;
+    }
+
+    public void setQuantidadeEstoque(int quantidadeEstoque)
+    {
+        this.quantidadeEstoque += quantidadeEstoque;
+    }
+
     @Override
     public String toString() {
-        return "\nTÃ­tulo do livro: " +getTitulo() +"\n" +
+        return "\nTítulo do livro: " +getTitulo() +"\n" +
                 "Tipo do livro: Fisico\n"+
-                "CÃ³digo ISBN: " +getIsbn() + "\n " +
+                "Código ISBN: " +getIsbn() + "\n" +
                 "Editora: " + getEditora() + "\n" +
                 "Nome do autor: " + getNomeAutor() + "\n" +
                 "Data de nascimento do autor: " + getDataNascimentoAutor() + "\n" +
-                "PreÃ§o: " +getPreco() + "\n" +
-                "Data da publicaÃ§Ã£o: " + getDataPublicacao() + "\n" +
+                "Preço: " +getPreco() + "\n" +
+                "Data da publicação: " + getDataPublicacao() + "\n" +
                 "Tipo da capa: " + getCapa().toString() + "\n" +
                 "Categoria " + getCategoria();
     }

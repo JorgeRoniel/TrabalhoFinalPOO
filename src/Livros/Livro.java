@@ -8,7 +8,7 @@ import Enum.Categoria;
 public abstract class Livro
 {
     private static final Locale locale = new Locale("pt","BR");
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy",locale);
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy",locale);
     private String titulo;
     private String editora;
     private String isbn;
@@ -24,7 +24,8 @@ public abstract class Livro
     }
 
     public Livro(String titulo, String editora, String isbn, Double preco,
-                 LocalDate dataPublicacao, Autor autor, Categoria categoria) {
+                 LocalDate dataPublicacao, Autor autor, Categoria categoria)
+    {
         this.titulo = titulo;
         this.editora = editora;
         this.isbn = isbn;

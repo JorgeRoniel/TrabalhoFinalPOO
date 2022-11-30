@@ -8,7 +8,7 @@ import java.util.Locale;
 public class Autor
 {
     private static final Locale locale = new Locale("pt","BR");
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy",locale);
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy",locale);
     private String nome;
     private LocalDate dataNascimento;
 
