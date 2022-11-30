@@ -5,7 +5,7 @@ import Enum.*;
 
 public class LivroFisico extends Livro {
     private TipoCapa tipoCapa; //Capa Flexível ou Capa Dura
-    private Integer quantidadeEstoque;
+    private int quantidadeEstoque;
     public LivroFisico(String titulo, String editora, String isbn, Double preco, Integer quantidadeEstoque,
                        LocalDate dataPublicacao, TipoCapa tipoCapa, Autor autor, Categoria categoria)
     {
@@ -19,7 +19,7 @@ public class LivroFisico extends Livro {
         return this.tipoCapa;
     }
 
-    public Integer getQuantidadeEstoque()
+    public int getQuantidadeEstoque()
     {
         return this.quantidadeEstoque;
     }

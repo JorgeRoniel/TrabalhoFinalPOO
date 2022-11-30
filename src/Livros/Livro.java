@@ -14,7 +14,7 @@ public abstract class Livro
     private String isbn;
     private Double preco;
     private LocalDate dataPublicacao;
-    private short edicao;
+    private int quantidadeVendas;
     private Categoria categoria;
     private Autor autor = new Autor();
 
@@ -55,10 +55,14 @@ public abstract class Livro
         this.dataPublicacao = dataPublicacao;
     }
 
-    public void setAutor(Autor autor) {
-        this.autor = autor;
+    public int getQuantidadeVendas()
+    {
+        return this.quantidadeVendas;
     }
-
+    public void setQuantidadeVendas(int quantidade)
+    {
+        this.quantidadeVendas += quantidade;
+    }
     public String getTitulo() {
         return titulo;
     }

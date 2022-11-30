@@ -32,6 +32,7 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
     @Override
     public void AdicionarLivroCarrinho() throws InputMismatchException, DateTimeException
     {
+        entrada.nextLine();
         try
         {
             System.out.println("Digite o titulo do livro que você procura !");
@@ -157,8 +158,17 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
         short escolha = entrada.nextShort();
 
         for(Livro livro: carrinho)
+        {
             if(livro instanceof LivroFisico)
-                ((LivroFisico) livro).setQuantidadeEstoque(-1);  // Para atualizar a quantidade em estoque !
+            {
+                ((LivroFisico) livro).setQuantidadeEstoque(-1); // Para atualizar a quantidade em estoque !
+                livro.setQuantidadeVendas(1);
+            }
+
+            livro.setQuantidadeVendas(1);
+        }
+
+
 
         if(escolha == 1)
             System.out.println("Compra foi realizada com sucesso no dia " + LocalDate.now().format(dateTimeFormatter) +

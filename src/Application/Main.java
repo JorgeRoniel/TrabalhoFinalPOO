@@ -52,7 +52,8 @@ public class Main
                 System.out.println("Digite 3 para PESQUISAR um livro !");
                 System.out.println("Digite 4 para IMPRIMIR o valor TOTAL de produtos em ESTOQUE !");
                 System.out.println("Digite 5 para IMPRIMIR todos os PRODUTOS que estão em ESTOQUE !");
-                System.out.println("Digite 6 para SAIR !");
+                System.out.println("Digite 6 para IMPRIMIR o livro MAIS VENDIDO !");
+                System.out.println("Digite 7 para SAIR !");
                 System.out.println("-------------------------------------------------------------------");
 
                 int escolha = entrada.nextInt();
@@ -84,7 +85,9 @@ public class Main
 
                     case 5 -> Estoque.ImprimirEstoque();
 
-                    case 6 ->
+                    case 6 -> System.out.println(Estoque.LivroMaisVendido());
+
+                    case 7 ->
                     {
                         return;
                     }
@@ -146,9 +149,7 @@ public class Main
     public static void main(String[] args) throws Excessao
     {
         /*
-            Fiz a parte do estoque. Falta fazer só a parte do tratamento de excessões e as categorias.
-
-            O resto já ta tudo ok.
+            categoria,
          */
 
         MenuGeral();
