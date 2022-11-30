@@ -18,19 +18,32 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
     private final Scanner entrada = new Scanner(System.in);
     List<Livro> carrinho = new ArrayList<>();
 
-    private LocalDate RecebeDataNascimento()
+    private LocalDate RecebeDataNascimento() throws DateTimeException
     {
 
-        System.out.println("Digite o ano de nascimento do autor: ");
-        int ano = entrada.nextInt();
+        try
+        {
+            System.out.println("Digite o ano de nascimento do autor: ");
+            int ano = entrada.nextInt();
 
-        System.out.println("Digite o mes de nascimento do autor: ");
-        int mes = entrada.nextInt();
+            System.out.println("Digite o mes de nascimento do autor: ");
+            int mes = entrada.nextInt();
 
-        System.out.println("Digite o dia de nascimento do autor: ");
-        int dia = entrada.nextInt();
+            System.out.println("Digite o dia de nascimento do autor: ");
+            int dia = entrada.nextInt();
 
-        return LocalDate.of(ano, mes, dia);
+            return LocalDate.of(ano, mes, dia);
+        }
+        catch (DateTimeException e)
+        {
+            System.out.println("Data informada é inválida !");
+
+            System.out.println("Tente novamente !");
+
+            RecebeDataNascimento();
+        }
+
+        return null;
     }
 
     @Override
@@ -85,19 +98,27 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
 
             if (tipoLivro == 1)
                 carrinho.add(new LivroFisico(titulo, editora, isbn, preco,
-                        LocalDate.of(ano, mes, dia), tipoCapa, autor,Categoria.valueOf("5")));
+                        LocalDate.of(ano, mes, dia), tipoCapa, autor,Categoria.Fantasia));
             else
                 carrinho.add(new LivroVirtual(titulo, editora, isbn, preco,
-                        LocalDate.of(ano, mes, dia), autor, Categoria.valueOf("6")));
+                        LocalDate.of(ano, mes, dia), autor, Categoria.Literatura));
 
         }
         catch (DateTimeException e)
         {
-            System.out.println(e.getMessage());
+            System.out.println("Datas informadas são inválidas !");
+
+            System.out.println("Tente novamente !");
+
+            AdicionarLivro();
         }
         catch (InputMismatchException e)
         {
             System.out.println("Dados informados são inválidos !");
+
+            System.out.println("Tente novamente !");
+
+            AdicionarLivro();
         }
     }
 
@@ -214,8 +235,13 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
     }
 
     @Override
-    public double getPrecoComJuros(double preco, int quantidadeParcelas) {
-        return Math.pow(1.1,quantidadeParcelas) * preco;
+    public double getPrecoComJuros(double preco, int quantidadeParcelas)
+    {
+        if(quantidadeParcelas < 4 && preco > 100)
+            return preco * 1.05;
+
+        else
+            return preco * 1.25;
     }
 
     @Override

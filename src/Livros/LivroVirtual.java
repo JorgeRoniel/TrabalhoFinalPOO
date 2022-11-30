@@ -1,7 +1,5 @@
 package Livros;
 
-import Exceptions.Excessao;
-import Interfaces.IDesconto;
 import Enum.*;
 
 import java.time.LocalDate;

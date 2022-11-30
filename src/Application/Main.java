@@ -28,8 +28,7 @@ public class Main
 
                 int escolha = entrada.nextInt();
 
-                switch (escolha)
-                {
+                switch (escolha) {
                     case 1 -> carrinho.AdicionarLivro();
                     case 2 -> carrinho.RemoverLivro();
                     case 3 -> carrinho.AtualizarLivro();
@@ -42,17 +41,17 @@ public class Main
         }
         catch (InputMismatchException e)
         {
-            System.out.println("Dados inv√°lidos !");
+            System.out.println("Dados inv·lidos !");
         }
     }
     public static void main(String[] args) throws Excessao
     {
         /*
-            Fiz mais uma parte de tratamento de erros. Devido a testes, vi que tamb√©m lan√ßava excess√µes de datas.
+            Fiz mais uma parte de tratamento de erros. Devido a testes, vi que tambÈm lanÁava excessıes de datas.
 
-            Ent√£o tamb√©m fiz tratamento de excess√µes para datas.
+            Ent„o tambÈm fiz tratamento de excessıes para datas.
 
-            Fiz algumas Altera√ß√µes para o autor
+            Fiz algumas AlteraÁıes para o autor
          */
 
         Menu();

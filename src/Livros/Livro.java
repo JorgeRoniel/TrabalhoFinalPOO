@@ -83,5 +83,7 @@ public abstract class Livro
     public String getNomeAutor() { return autor.getNome();}
 
     public String getDataNascimentoAutor()
-    { return autor.getDataNascimento();}
+    {
+        return autor.getDataNascimento();
+    }
 }
