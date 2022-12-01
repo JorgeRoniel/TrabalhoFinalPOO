@@ -196,9 +196,11 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
                     }
 
                     livro.setQuantidadeVendas(1);
-
-                    carrinho.remove(livro); // Esvaziar o carrinho após o CheckOut !
                 } // for
+
+                if(!carrinho.isEmpty())
+                    carrinho.clear();
+
             }// if
         } // try
 

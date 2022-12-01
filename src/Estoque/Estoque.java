@@ -245,8 +245,6 @@ public class Estoque
                 livrosEstoque.add(new LivroVirtual(titulo, editora, isbn, preco,
                         LocalDate.of(ano, mes, dia), CadastrarAutor(), categoria[escolha - 1]));
 
-            entrada.nextLine();
-
         }
         catch(InputMismatchException e)
         {

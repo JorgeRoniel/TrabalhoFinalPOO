@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment="Já Cadastrei as categorias. Acho que já tá pronto.&#10;            &#10;Só falta verificar onde tá bugando a leitura de Strings." />
+    <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment="Já Cadastrei as categorias. Acho que já tá pronto.&#10;            &#10;Só falta verificar onde tá bugando a leitura de Strings.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Enum/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enum/Categoria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Estoque/Estoque.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estoque/Estoque.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,7 +79,8 @@
       <workItem from="1669808788257" duration="1995000" />
       <workItem from="1669811756843" duration="5080000" />
       <workItem from="1669831068583" duration="5169000" />
-      <workItem from="1669861419940" duration="3314000" />
+      <workItem from="1669861419940" duration="3462000" />
+      <workItem from="1669909731517" duration="1230000" />
     </task>
     <task id="LOCAL-00001" summary="Adicionei a classe abstrata Livro.">
       <created>1668794946689</created>
@@ -187,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669864777436</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Já Cadastrei as categorias. Acho que já tá pronto.&#10;            &#10;Só falta verificar onde tá bugando a leitura de Strings.">
+      <created>1669864844685</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1669864844685</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

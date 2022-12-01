@@ -20,9 +20,4 @@ public enum Categoria
         this.escolha = escolha;
     }
 
-    public int getEscolha()
-    {
-        return escolha;
-    }
-
 }

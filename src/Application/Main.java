@@ -3,10 +3,8 @@ package Application;
 import Carrinho_Livros.Carrinho;
 import Estoque.Estoque;
 import Exceptions.Excessao;
-
 import java.text.NumberFormat;
 import java.time.DateTimeException;
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import Livros.*;
@@ -62,9 +60,17 @@ public class Main
 
                 switch (escolha)
                 {
-                    case 1 -> Estoque.CadastrarNovoLivro();
+                    case 1 ->
+                    {
+                        entrada.nextLine();
+                        Estoque.CadastrarNovoLivro();
+                    }
 
-                    case 2 -> Estoque.AtualizarLivro();
+                    case 2 ->
+                    {
+                        entrada.nextLine();
+                        Estoque.AtualizarLivro();
+                    }
 
                     case 3 ->
                     {
@@ -78,7 +84,7 @@ public class Main
                         if(livro != null)
                         {
                             System.out.println("Livro encontrado ! Imprimindo os dados...............");
-                            System.out.println(livro);
+                            System.out.println();
                         }
                         else
                             System.out.println("Livro não encontrado !");
@@ -103,7 +109,7 @@ public class Main
         }
         catch (DateTimeException e)
         {
-
+            System.out.println("Data inválida !");
         }
     }
     public static void MenuCarrinho() throws InputMismatchException
@@ -126,8 +132,18 @@ public class Main
 
                 switch (escolha)
                 {
-                    case 1 -> carrinho.AdicionarLivroCarrinho();
-                    case 2 -> carrinho.RemoverLivroCarrinho();
+                    case 1 ->
+                    {
+                        entrada.nextLine();
+
+                        carrinho.AdicionarLivroCarrinho();
+                    }
+                    case 2 ->
+                    {
+                        entrada.nextLine();
+
+                        carrinho.RemoverLivroCarrinho();
+                    }
                     case 3 -> carrinho.ImprimirConteudoCarrinho();
                     case 4 -> carrinho.CheckOut();
                     case 5 ->
@@ -151,9 +167,10 @@ public class Main
     public static void main(String[] args) throws Excessao
     {
         /*
-            Já Cadastrei as categorias. Acho que já tá pronto.
+            Este código se encontra armazenado no seguinte repositório:
 
-            Só falta verificar onde tá bugando a leitura de Strings.
+            https://github.com/JorgeRoniel/TrabalhoFinalPOO
+
          */
 
         MenuGeral();
