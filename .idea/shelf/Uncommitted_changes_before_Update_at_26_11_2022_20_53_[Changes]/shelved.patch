@@ -1,0 +1,221 @@
+Index: src/Livros/Autor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Livros;\r\n\r\nimport java.time.LocalDate;\r\nimport java.time.Period;\r\nimport java.time.format.DateTimeFormatter;\r\nimport java.util.Locale;\r\n\r\npublic class Autor\r\n{\r\n    private static final Locale locale = new Locale(\"pt\",\"BR\");\r\n    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(\"dd-MM-yyyy\",locale);\r\n    private String nome;\r\n    private LocalDate dataNascimento;\r\n\r\n    public Autor() {\r\n    }\r\n\r\n    public Autor(String nome, LocalDate dataNascimento)\r\n    {\r\n        this.nome = nome;\r\n        this.dataNascimento = dataNascimento;\r\n    }\r\n\r\n    public String getNome() {\r\n        return nome;\r\n    }\r\n\r\n    public String getDataNascimento()\r\n    {\r\n        return dataNascimento.format(formatter);\r\n    }\r\n\r\n    public int getIdade()\r\n    {\r\n        return Period.between(dataNascimento,LocalDate.now()).getYears();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/src/Livros/Autor.java b/src/Livros/Autor.java
+--- a/src/Livros/Autor.java	(revision d60318f48c9438d5f4d61f0ac1073306c0ae56b6)
++++ b/src/Livros/Autor.java	(date 1669219757967)
+@@ -12,7 +12,9 @@
+     private String nome;
+     private LocalDate dataNascimento;
+ 
+-    public Autor() {
++    public Autor()
++    {
++
+     }
+ 
+     public Autor(String nome, LocalDate dataNascimento)
+Index: src/Livros/Livro.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Livros;\r\n\r\nimport java.time.LocalDate;\r\nimport java.time.format.DateTimeFormatter;\r\nimport java.util.Locale;\r\n\r\npublic abstract class Livro {\r\n    private static final Locale locale = new Locale(\"pt\",\"BR\");\r\n    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(\"dd-MM-yyyy\",locale);\r\n    private String titulo;\r\n    private String editora;\r\n    private String isbn;\r\n    private Double preco;\r\n    private LocalDate dataPublicacao;\r\n\r\n    private Autor autor = new Autor();\r\n\r\n    public Livro() {\r\n\r\n    }\r\n\r\n    public Livro(String titulo, String editora, String isbn, Double preco,\r\n                 LocalDate dataPublicacao, Autor autor) {\r\n        this.titulo = titulo;\r\n        this.editora = editora;\r\n        this.isbn = isbn;\r\n        this.preco = preco;\r\n        this.dataPublicacao = dataPublicacao;\r\n        this.autor = autor;\r\n    }\r\n\r\n    public void setTitulo(String titulo) {\r\n        this.titulo = titulo;\r\n    }\r\n\r\n    public void setEditora(String editora) {\r\n        this.editora = editora;\r\n    }\r\n\r\n    public void setIsbn(String isbn) {\r\n        this.isbn = isbn;\r\n    }\r\n\r\n    public void setPreco(Double preco) {\r\n        this.preco = preco;\r\n    }\r\n\r\n    public void setDataPublicacao(LocalDate dataPublicacao) {\r\n        this.dataPublicacao = dataPublicacao;\r\n    }\r\n\r\n    public void setAutor(Autor autor) {\r\n        this.autor = autor;\r\n    }\r\n\r\n    public String getTitulo() {\r\n        return titulo;\r\n    }\r\n\r\n    public String getEditora() {\r\n        return editora;\r\n    }\r\n\r\n    public String getIsbn() {\r\n        return isbn;\r\n    }\r\n\r\n    public Double getPreco() {\r\n        return preco;\r\n    }\r\n\r\n    public String getDataPublicacao() {\r\n        return formatter.format(dataPublicacao);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/src/Livros/Livro.java b/src/Livros/Livro.java
+--- a/src/Livros/Livro.java	(revision d60318f48c9438d5f4d61f0ac1073306c0ae56b6)
++++ b/src/Livros/Livro.java	(date 1669219757985)
+@@ -12,7 +12,7 @@
+     private String isbn;
+     private Double preco;
+     private LocalDate dataPublicacao;
+-
++    private short edicao;
+     private Autor autor = new Autor();
+ 
+     public Livro() {
+Index: src/Carrinho_Livros/Carrinho.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Carrinho_Livros;\r\n\r\nimport Exceptions.Excessao;\r\nimport Interfaces.IJuros;\r\nimport Livros.Livro;\r\nimport Livros.LivroFisico;\r\nimport Enum.TipoCapa;\r\nimport Livros.LivroVirtual;\r\nimport Livros.Autor;\r\n\r\nimport java.text.DateFormat;\r\nimport java.text.NumberFormat;\r\nimport java.time.LocalDate;\r\nimport java.time.LocalDateTime;\r\nimport java.time.format.DateTimeFormatter;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Locale;\r\nimport java.util.Scanner;\r\n\r\npublic class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Interfaces.IJuros\r\n{\r\n    private final Scanner entrada = new Scanner(System.in);\r\n    List<Livro> carrinho = new ArrayList<>();\r\n\r\n    private LocalDate DataNasc(){\r\n        System.out.println(\"Digite o ano de nascimento do autor: \");\r\n        int ano = entrada.nextInt();\r\n\r\n        System.out.println(\"Digite o mes de nascimento do autor: \");\r\n        int mes = entrada.nextInt();\r\n\r\n        System.out.println(\"Digite o dia de nascimento do autor: \");\r\n        int dia = entrada.nextInt();\r\n\r\n        LocalDate dataNasc = LocalDate.of(ano, mes, dia);\r\n\r\n        return dataNasc;\r\n    }\r\n\r\n    @Override\r\n    public void AdicionarLivro()\r\n    {\r\n        System.out.println(\"Digite o titulo do livro !\");\r\n        String titulo = entrada.nextLine();\r\n\r\n        System.out.println(\"Digite o ISBN do livro !\");\r\n        String isbn = entrada.nextLine();\r\n\r\n        System.out.println(\"Digite o nome da editora !\");\r\n        String editora = entrada.nextLine();\r\n\r\n        System.out.println(\"Digite o preço do livro !\");\r\n        double preco = entrada.nextDouble();\r\n\r\n        entrada.nextLine();\r\n\r\n        System.out.println(\"Digite o nome do autor: \");\r\n        String nome_a = entrada.nextLine();\r\n\r\n        Autor a = new Autor(nome_a, DataNasc());\r\n\r\n        entrada.nextLine();\r\n\r\n        System.out.println(\"Digite 1 para livro físico e 2 para virtual !\");\r\n        short tipoLivro = entrada.nextShort();\r\n\r\n        System.out.println(\"Digite o dia de lançamento do livro !\");\r\n        int dia = entrada.nextInt();\r\n\r\n        System.out.println(\"Digite o mês de lançamento do livro !\");\r\n        int mes = entrada.nextInt();\r\n\r\n        System.out.println(\"Digite o ano de lançamento do livro !\");\r\n        int ano = entrada.nextInt();\r\n\r\n        System.out.println(\"Digite 1 para capa flexível e 2 para capa dura !\");\r\n        short tipo = entrada.nextShort();\r\n\r\n        TipoCapa tipoCapa;\r\n\r\n        if(tipo == 1)\r\n            tipoCapa = TipoCapa.Flexivel;\r\n        else\r\n            tipoCapa = TipoCapa.Dura;\r\n\r\n        if(tipoLivro == 1)\r\n            carrinho.add(new LivroFisico(titulo,editora,isbn,preco,LocalDate.of(ano,mes,dia),tipoCapa, a));\r\n        else\r\n            carrinho.add(new LivroVirtual(titulo,editora,isbn,preco,LocalDate.of(ano,mes,dia), a));\r\n    }\r\n\r\n    @Override\r\n    public void RemoverLivro()\r\n    {\r\n        int i = 0;\r\n\r\n        for(Livro livro: carrinho)\r\n        {\r\n            System.out.println(livro.getTitulo() + \" \" + livro.getPreco());\r\n            System.out.print(\" - \" + i);\r\n        }\r\n\r\n        System.out.println(\"Digite o índice do livro que você quer remover !\");\r\n        short escolha = entrada.nextShort();\r\n\r\n        carrinho.remove(escolha);\r\n    }\r\n\r\n    @Override\r\n    public void AtualizarLivro()\r\n    {\r\n        int i = 0;\r\n\r\n        for(Livro livro: carrinho)\r\n        {\r\n            System.out.println(livro.getTitulo() + \" \" + livro.getPreco());\r\n            System.out.print(\" - \" + i);\r\n        }\r\n\r\n        System.out.println(\"Digite o índice do livro que você quer atualizar !\");\r\n        short indice = entrada.nextShort();\r\n\r\n        for (Livro livro : carrinho)\r\n        {\r\n            if (i == indice)\r\n            {\r\n                System.out.println(\"Digite o índice do livro que você quer atualizar !\");\r\n                short escolha = entrada.nextShort();\r\n\r\n                System.out.println(\"O que você deseja atualizar ?\");\r\n                System.out.println(\"Digite 1 para título !\");\r\n                System.out.println(\"Digite 2 para ISBN !\");\r\n                System.out.println(\"Digite 3 para Editora !\");\r\n                System.out.println(\"Digite 4 para o preço !\");\r\n                System.out.println(\"Digite 5 para data de publicação !\");\r\n\r\n                short opcao = entrada.nextShort();\r\n\r\n                switch (opcao) {\r\n                    case 1 ->\r\n                    {\r\n                        System.out.println(\"Digite o novo título !\");\r\n                        String titulo = entrada.nextLine();\r\n\r\n                        livro.setTitulo(titulo);\r\n                    }\r\n\r\n                    case 2 ->\r\n                    {\r\n                        System.out.println(\"Digite o novo ISBN !\");\r\n                        String isbn = entrada.nextLine();\r\n\r\n                        livro.setIsbn(isbn);\r\n                    }\r\n\r\n                    case 3 ->\r\n                    {\r\n                        System.out.println(\"Digite a nova editora !\");\r\n                        String editora = entrada.nextLine();\r\n\r\n                        livro.setEditora(editora);\r\n                    }\r\n\r\n                    case 4 ->\r\n                    {\r\n                        System.out.println(\"Digite o novo preço !\");\r\n                        Double preco = entrada.nextDouble();\r\n\r\n                        livro.setPreco(preco);\r\n                    }\r\n\r\n                    case 5 ->\r\n                    {\r\n                        System.out.println(\"Digite o dia de lançamento do livro !\");\r\n                        int n_dia = entrada.nextInt();\r\n\r\n                        System.out.println(\"Digite o mês de lançamento do livro !\");\r\n                        int n_mes = entrada.nextInt();\r\n\r\n                        System.out.println(\"Digite o ano de lançamento do livro !\");\r\n                        int n_ano = entrada.nextInt();\r\n\r\n                        LocalDate n_dataL = LocalDate.of(n_ano, n_mes, n_dia);\r\n                        livro.setDataPublicacao(n_dataL);\r\n                    }\r\n\r\n                    default ->\r\n                    {\r\n                        return;\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n    @Override\r\n    public double getPrecoDesconto(double preco) throws Excessao\r\n    {\r\n        if(preco<= 0)\r\n            throw new Excessao(preco);\r\n\r\n        return preco * 0.85;  // 15% de desconto !\r\n    }\r\n\r\n    @Override\r\n    public double getPrecoComJuros(double preco, int quantidadeParcelas) {\r\n        return Math.pow(1.1,quantidadeParcelas) * preco;\r\n    }\r\n\r\n    @Override\r\n    public void CheckOut() throws Excessao {\r\n        double soma = 0;\r\n        double precoFinal = 0;\r\n        NumberFormat numberFormat = NumberFormat.getCurrencyInstance();\r\n        Locale locale = new Locale(\"pt\", \"BR\");\r\n        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(\"dd/MM/yyyy\",locale);\r\n\r\n        for(Livro livro: carrinho)\r\n        {\r\n            if(livro instanceof LivroVirtual)\r\n                soma += getPrecoDesconto(livro.getPreco());\r\n            else\r\n                soma += livro.getPreco();\r\n        }\r\n\r\n        System.out.println(\"O total da compra foi de: \" + numberFormat.format(soma) + \"\\nComo você deseja pagar ? Digite 1 para pagamento \" +\r\n                \"à vista e 2 para pagamento parcelado !\");\r\n\r\n        short pagamento = entrada.nextShort();\r\n\r\n        if(pagamento == 1)\r\n        {\r\n            System.out.println(\"Como você irá pagar à vista, iremos lhe dar um desconto de 15% !\");\r\n            precoFinal = getPrecoDesconto(soma);\r\n        }\r\n\r\n        else\r\n        {\r\n            System.out.println(\"Digite a quantidade de parcelas !\");\r\n            short parcelas = entrada.nextShort();\r\n\r\n            precoFinal = getPrecoComJuros(soma,parcelas);\r\n        }\r\n\r\n        System.out.println(\"Digite 1 para finalizar a compra e 2 para cancelar !\");\r\n        short escolha = entrada.nextShort();\r\n\r\n        if(escolha == 1)\r\n            System.out.println(\"Compra foi realizada com sucesso no dia \"\r\n                    + LocalDate.now().format(dateTimeFormatter) +\r\n                    \" as \" + LocalDateTime.now().getHour() + \" horas e \" + LocalDateTime.now().getMinute() + \" minutos !\" +\r\n                \" O preço final ficou em: \" + numberFormat.format(precoFinal));\r\n    }\r\n\r\n    public void PesquisarLivro(String titulo){\r\n        for(int i = 0; i<carrinho.size(); i++){\r\n            if(this.carrinho.get(i).getTitulo().equals(titulo)){\r\n                System.out.println(this.carrinho.get(i));\r\n            }\r\n        }\r\n    }\r\n\r\n    public void Pesquisar_porPreco(Integer precoI, Integer precoF){\r\n        for(int i = 0; i < carrinho.size(); i++){\r\n            if(this.carrinho.get(i).getPreco() <= precoF && this.carrinho.get(i).getPreco() >= precoI){\r\n                System.out.println(this.carrinho.get(i));\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/src/Carrinho_Livros/Carrinho.java b/src/Carrinho_Livros/Carrinho.java
+--- a/src/Carrinho_Livros/Carrinho.java	(revision d60318f48c9438d5f4d61f0ac1073306c0ae56b6)
++++ b/src/Carrinho_Livros/Carrinho.java	(date 1669219881323)
+@@ -1,14 +1,10 @@
+ package Carrinho_Livros;
+ 
+ import Exceptions.Excessao;
+-import Interfaces.IJuros;
+ import Livros.Livro;
+ import Livros.LivroFisico;
+ import Enum.TipoCapa;
+ import Livros.LivroVirtual;
+-import Livros.Autor;
+-
+-import java.text.DateFormat;
+ import java.text.NumberFormat;
+ import java.time.LocalDate;
+ import java.time.LocalDateTime;
+@@ -23,21 +19,6 @@
+     private final Scanner entrada = new Scanner(System.in);
+     List<Livro> carrinho = new ArrayList<>();
+ 
+-    private LocalDate DataNasc(){
+-        System.out.println("Digite o ano de nascimento do autor: ");
+-        int ano = entrada.nextInt();
+-
+-        System.out.println("Digite o mes de nascimento do autor: ");
+-        int mes = entrada.nextInt();
+-
+-        System.out.println("Digite o dia de nascimento do autor: ");
+-        int dia = entrada.nextInt();
+-
+-        LocalDate dataNasc = LocalDate.of(ano, mes, dia);
+-
+-        return dataNasc;
+-    }
+-
+     @Override
+     public void AdicionarLivro()
+     {
+@@ -55,13 +36,6 @@
+ 
+         entrada.nextLine();
+ 
+-        System.out.println("Digite o nome do autor: ");
+-        String nome_a = entrada.nextLine();
+-
+-        Autor a = new Autor(nome_a, DataNasc());
+-
+-        entrada.nextLine();
+-
+         System.out.println("Digite 1 para livro físico e 2 para virtual !");
+         short tipoLivro = entrada.nextShort();
+ 
+@@ -85,9 +59,9 @@
+             tipoCapa = TipoCapa.Dura;
+ 
+         if(tipoLivro == 1)
+-            carrinho.add(new LivroFisico(titulo,editora,isbn,preco,LocalDate.of(ano,mes,dia),tipoCapa, a));
++            carrinho.add(new LivroFisico(titulo,editora,isbn,preco,LocalDate.of(ano,mes,dia),tipoCapa));
+         else
+-            carrinho.add(new LivroVirtual(titulo,editora,isbn,preco,LocalDate.of(ano,mes,dia), a));
++            carrinho.add(new LivroVirtual(titulo,editora,isbn,preco,LocalDate.of(ano,mes,dia)));
+     }
+ 
+     @Override
+@@ -172,17 +146,10 @@
+ 
+                     case 5 ->
+                     {
+-                        System.out.println("Digite o dia de lançamento do livro !");
+-                        int n_dia = entrada.nextInt();
+-
+-                        System.out.println("Digite o mês de lançamento do livro !");
+-                        int n_mes = entrada.nextInt();
++                        System.out.println("Digite a nova data no formato (dd-mm-yyyy) !");
++                        String data = entrada.nextLine();
+ 
+-                        System.out.println("Digite o ano de lançamento do livro !");
+-                        int n_ano = entrada.nextInt();
+-
+-                        LocalDate n_dataL = LocalDate.of(n_ano, n_mes, n_dia);
+-                        livro.setDataPublicacao(n_dataL);
++                        livro.setDataPublicacao(LocalDate.parse(data));
+                     }
+ 
+                     default ->
+Index: src/Livros/LivroFisico.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Livros;\r\n\r\nimport java.time.LocalDate;\r\nimport java.util.GregorianCalendar;\r\nimport Enum.TipoCapa;\r\n\r\npublic class LivroFisico extends Livro {\r\n    private TipoCapa tipoCapa; //Capa Flexível ou Capa Dura\r\n    public LivroFisico(String titulo, String editora, String isbn, Double preco,\r\n                       LocalDate dataPublicacao, TipoCapa tipoCapa, Autor autor) {\r\n        super(titulo, editora, isbn,preco, dataPublicacao, autor);\r\n\r\n        this.tipoCapa = tipoCapa;\r\n    }\r\n\r\n    public TipoCapa getCapa()\r\n    {\r\n        return this.tipoCapa;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"\\nTítulo do livro: \" +getTitulo() +\"\\n\" +\r\n                \"Código ISBN: \" +getIsbn() + \"\\n \" +\r\n                \"Editora: \" + getEditora() + \"\\n\" +\r\n                \"Preço: \" +getPreco() + \"\\n\" +\r\n                \"Data da publicação: \" + getDataPublicacao() + \"\\n\" +\r\n                \"Tipo da capa: \" + getCapa().toString();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Livros/LivroFisico.java b/src/Livros/LivroFisico.java
+--- a/src/Livros/LivroFisico.java	(revision d60318f48c9438d5f4d61f0ac1073306c0ae56b6)
++++ b/src/Livros/LivroFisico.java	(date 1669219881338)
+@@ -1,14 +1,13 @@
+ package Livros;
+ 
+ import java.time.LocalDate;
+-import java.util.GregorianCalendar;
+ import Enum.TipoCapa;
+ 
+ public class LivroFisico extends Livro {
+     private TipoCapa tipoCapa; //Capa Flexível ou Capa Dura
+     public LivroFisico(String titulo, String editora, String isbn, Double preco,
+-                       LocalDate dataPublicacao, TipoCapa tipoCapa, Autor autor) {
+-        super(titulo, editora, isbn,preco, dataPublicacao, autor);
++                       LocalDate dataPublicacao, TipoCapa tipoCapa) {
++        super(titulo, editora, isbn,preco, dataPublicacao);
+ 
+         this.tipoCapa = tipoCapa;
+     }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"0b33d30a-7fb0-4cc2-90c6-cd10828a6b86\" name=\"Changes\" comment=\"Pequena atualização de terça\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Application/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Application/Main.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Livros/Livro.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Livros/Livro.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Livros/LivroFisico.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Livros/LivroFisico.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Livros/LivroVirtual.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Livros/LivroVirtual.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n        <option value=\"Enum\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"PUSH_TAGS\">\r\n      <GitPushTagMode>\r\n        <option name=\"argument\" value=\"--tags\" />\r\n        <option name=\"title\" value=\"All\" />\r\n      </GitPushTagMode>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2HjLnRjvWSwwQ3ED8soKHUsLGJR\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"1\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/Migue/Documents/JAVA/Teste&quot;,\r\n    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateClassDialog.RecentsKey\">\r\n      <recent name=\"Carrinho\" />\r\n    </key>\r\n    <key name=\"MoveClassesOrPackagesDialog.RECENTS_KEY\">\r\n      <recent name=\"Interfaces\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"0b33d30a-7fb0-4cc2-90c6-cd10828a6b86\" name=\"Changes\" comment=\"Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento e exceptions !\" />\r\n      <created>1668793712965</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1668793712965</updated>\r\n      <workItem from=\"1668793714406\" duration=\"227000\" />\r\n      <workItem from=\"1668793944862\" duration=\"161000\" />\r\n      <workItem from=\"1668794158359\" duration=\"687000\" />\r\n      <workItem from=\"1668794876117\" duration=\"7835000\" />\r\n      <workItem from=\"1668814405102\" duration=\"2809000\" />\r\n      <workItem from=\"1669124912627\" duration=\"3365000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Adicionei a classe abstrata Livro.\">\r\n      <created>1668794946689</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668794946689</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Adicionei a classe abstrata Livro.\">\r\n      <created>1668795016326</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668795016326</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento !\">\r\n      <created>1668796777620</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668796777620</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento !\">\r\n      <created>1668800340340</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668800340340</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento e exceptions !\">\r\n      <created>1668806138518</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668806138518</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento e exceptions !\">\r\n      <created>1668806880825</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1668806880825</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento e exceptions !\">\r\n      <created>1669124950158</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669124950158</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"Programa quase concluído. Falta fazer tratamento de erros.\">\r\n      <created>1669128330261</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669128330261</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"Pequena atualização de terça\">\r\n      <created>1669135737055</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1669135737055</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"10\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Adicionei a classe abstrata Livro.\" />\r\n    <MESSAGE value=\"Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento !\" />\r\n    <MESSAGE value=\"Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento e exceptions !\" />\r\n    <MESSAGE value=\"Programa quase concluído. Falta fazer tratamento de erros.\" />\r\n    <MESSAGE value=\"Pequena atualização de terça\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Pequena atualização de terça\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d60318f48c9438d5f4d61f0ac1073306c0ae56b6)
++++ b/.idea/workspace.xml	(date 1669299248474)
+@@ -1,13 +1,12 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment="Pequena atualização de terça">
++    <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment="Programa quase concluído. Falta fazer tratamento de erros e inserir autor.">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Application/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Main.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Livros/Autor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Livros/Autor.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Livros/Livro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Livros/Livro.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Livros/LivroFisico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Livros/LivroFisico.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/Livros/LivroVirtual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Livros/LivroVirtual.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -76,6 +75,7 @@
+       <workItem from="1668794876117" duration="7835000" />
+       <workItem from="1668814405102" duration="2809000" />
+       <workItem from="1669124912627" duration="3365000" />
++      <workItem from="1669299185166" duration="63000" />
+     </task>
+     <task id="LOCAL-00001" summary="Adicionei a classe abstrata Livro.">
+       <created>1668794946689</created>
+@@ -133,14 +133,7 @@
+       <option name="project" value="LOCAL" />
+       <updated>1669128330261</updated>
+     </task>
+-    <task id="LOCAL-00009" summary="Pequena atualização de terça">
+-      <created>1669135737055</created>
+-      <option name="number" value="00009" />
+-      <option name="presentableId" value="LOCAL-00009" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1669135737055</updated>
+-    </task>
+-    <option name="localTasksCounter" value="10" />
++    <option name="localTasksCounter" value="9" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -162,8 +155,7 @@
+     <MESSAGE value="Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento !" />
+     <MESSAGE value="Adicionei a classe abstrata Livro e Autor. Junto com a interface Financeiro e enums para gênero e tipo de pagamento e exceptions !" />
+     <MESSAGE value="Programa quase concluído. Falta fazer tratamento de erros." />
+-    <MESSAGE value="Pequena atualização de terça" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Pequena atualização de terça" />
++    <option name="LAST_COMMIT_MESSAGE" value="Programa quase concluído. Falta fazer tratamento de erros." />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />
