@@ -1,10 +1,11 @@
 package Livros;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import Enum.*;
 
 public class LivroFisico extends Livro {
-    private TipoCapa tipoCapa; //Capa Flexível ou Capa Dura
+    private final TipoCapa tipoCapa; //Capa Flexível ou Capa Dura
     private int quantidadeEstoque;
     public LivroFisico(String titulo, String editora, String isbn, Double preco, Integer quantidadeEstoque,
                        LocalDate dataPublicacao, TipoCapa tipoCapa, Autor autor, Categoria categoria)
@@ -37,9 +38,10 @@ public class LivroFisico extends Livro {
                 "Editora: " + getEditora() + "\n" +
                 "Nome do autor: " + getNomeAutor() + "\n" +
                 "Data de nascimento do autor: " + getDataNascimentoAutor() + "\n" +
-                "Preço: " +getPreco() + "\n" +
+                "Preço: " + NumberFormat.getCurrencyInstance().format(getPreco()) + "\n" +
+                "Quantidade em estoque: " +getQuantidadeEstoque() + "\n" +
                 "Data da publicação: " + getDataPublicacao() + "\n" +
                 "Tipo da capa: " + getCapa().toString() + "\n" +
-                "Categoria " + getCategoria();
+                "Categoria: " + getCategoria();
     }
 }

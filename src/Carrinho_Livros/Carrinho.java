@@ -6,7 +6,6 @@ import Livros.Livro;
 import Livros.LivroFisico;
 import Livros.LivroVirtual;
 import java.text.NumberFormat;
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -27,12 +26,11 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
             soma += livro.getPreco();
         }
 
-        System.out.print("Total da compra até o momento: " + NumberFormat.getCurrencyInstance().format(soma));
+        System.out.print("Total da compra até o momento: \n" + NumberFormat.getCurrencyInstance().format(soma) + "\n");
     }
     @Override
-    public void AdicionarLivroCarrinho() throws InputMismatchException, DateTimeException
+    public void AdicionarLivroCarrinho() throws InputMismatchException
     {
-        entrada.nextLine();
         try
         {
             System.out.println("Digite o titulo do livro que você procura !");
@@ -66,7 +64,11 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
                 int escolha = entrada.nextInt();
 
                 if(escolha == 1)
+                {
                     carrinho.add(livro);
+
+                    System.out.println("O livro foi adicionado no carrinho !");
+                }
             }
             else
                 System.out.println("Não encontramos o seu livro !");
@@ -93,24 +95,40 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
             System.out.print(" - " + i);
         }
 
-        System.out.println("Digite o índice do livro que você quer remover !");
-        short escolha = entrada.nextShort();
+        try
+        {
+            System.out.println("Digite o índice do livro que você quer remover !");
+            short escolha = entrada.nextShort();
 
-        carrinho.remove(escolha);
+            carrinho.remove(escolha);
+        }
+        catch (InputMismatchException e)
+        {
+            System.out.println("Dados inválidos !");
+        }
     }
 
     @Override
     public double getPrecoDesconto(double preco) throws Excessao
     {
-        Excessao.ValidarPreco(preco);
+        try
+        {
+            Excessao.ValidarPreco(preco);
 
-        return preco * 0.85;  // 15% de desconto !
+            return preco * 0.85;  // 15% de desconto !
+        }
+        catch (IllegalArgumentException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        return 0;
     }
 
     @Override
     public double getPrecoComJuros(double preco, int quantidadeParcelas)
     {
-        if(quantidadeParcelas < 4 && preco > 100)
+        if(quantidadeParcelas < 4 && preco > 50)
             return preco * 1.05;
 
         else
@@ -127,6 +145,12 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
         Locale locale = new Locale("pt", "BR");
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy",locale);
 
+        if(carrinho.isEmpty())
+        {
+            System.out.println("O carrinho está vazio !");
+            return;
+        }
+
         for(Livro livro: carrinho)
         {
             if(livro instanceof LivroVirtual)
@@ -135,46 +159,54 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
                 soma += livro.getPreco();
         }
 
-        System.out.println("O total da compra foi de: " + numberFormat.format(soma) + "\nComo você deseja pagar ? " +
-                "Digite 1 para pagamento à vista e 2 para pagamento parcelado !");
-
-        short pagamento = entrada.nextShort();
-
-        if(pagamento == 1)
+        try
         {
-            System.out.println("Como você irá pagar à vista, iremos lhe dar um desconto de 15% !");
-            precoFinal = getPrecoDesconto(soma);
-        }
+            System.out.println("O total da compra foi de: " + numberFormat.format(soma) + "\nComo você deseja pagar ? " +
+                    "Digite 1 para pagamento à vista e 2 para pagamento parcelado !");
 
-        else
-        {
-            System.out.println("Digite a quantidade de parcelas !");
-            short parcelas = entrada.nextShort();
+            short pagamento = entrada.nextShort();
 
-            precoFinal = getPrecoComJuros(soma,parcelas);
-        }
-
-        System.out.println("Digite 1 para finalizar a compra e 2 para cancelar !");
-        short escolha = entrada.nextShort();
-
-        for(Livro livro: carrinho)
-        {
-            if(livro instanceof LivroFisico)
+            if (pagamento == 1)
             {
-                ((LivroFisico) livro).setQuantidadeEstoque(-1); // Para atualizar a quantidade em estoque !
-                livro.setQuantidadeVendas(1);
+                System.out.println("Como você irá pagar à vista, iremos lhe dar um desconto de 15% !");
+                precoFinal = getPrecoDesconto(soma);
+            } else
+            {
+                System.out.println("Digite a quantidade de parcelas !");
+                short parcelas = entrada.nextShort();
+
+                precoFinal = getPrecoComJuros(soma, parcelas);
             }
 
-            livro.setQuantidadeVendas(1);
+            System.out.println("Digite 1 para finalizar a compra e 2 para cancelar !");
+            short escolha = entrada.nextShort();
+
+
+            if (escolha == 1)
+            {
+                System.out.println("Compra foi realizada com sucesso no dia " + LocalDate.now().format(dateTimeFormatter) +
+                        " as " + LocalDateTime.now().getHour() + " horas e " + LocalDateTime.now().getMinute() + " minutos !" +
+                        " O preço final ficou em: " + numberFormat.format(precoFinal));
+
+                for (Livro livro : carrinho)
+                {
+                    if (livro instanceof LivroFisico)
+                    {
+                        ((LivroFisico) livro).setQuantidadeEstoque(-1); // Para atualizar a quantidade em estoque !
+                    }
+
+                    livro.setQuantidadeVendas(1);
+
+                    carrinho.remove(livro); // Esvaziar o carrinho após o CheckOut !
+                } // for
+            }// if
+        } // try
+
+        catch (InputMismatchException e)
+        {
+            System.out.println("Dados inválidos !");
         }
-
-
-
-        if(escolha == 1)
-            System.out.println("Compra foi realizada com sucesso no dia " + LocalDate.now().format(dateTimeFormatter) +
-                    " as " + LocalDateTime.now().getHour() + " horas e " + LocalDateTime.now().getMinute() + " minutos !" +
-                " O preço final ficou em: " + numberFormat.format(precoFinal));
-    }
+    } // class
 
     public void Pesquisar() throws InputMismatchException
     {

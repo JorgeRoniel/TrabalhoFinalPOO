@@ -4,6 +4,7 @@ import Carrinho_Livros.Carrinho;
 import Estoque.Estoque;
 import Exceptions.Excessao;
 
+import java.text.NumberFormat;
 import java.time.DateTimeException;
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -12,7 +13,7 @@ import Livros.*;
 
 public class Main
 {
-    private static Scanner entrada = new Scanner(System.in);
+    private static final Scanner entrada = new Scanner(System.in);
 
     public static void MenuGeral() throws InputMismatchException
     {
@@ -22,13 +23,14 @@ public class Main
             {
                 System.out.println("Digite 1 para ir para o Menu do CONTROLE DE ESTOQUE !");
                 System.out.println("Digite 2 para ir para o Menu de VENDAS !");
-
+                System.out.println("Digite 3 para sair !");
                 int escolha = entrada.nextInt();
 
                 switch (escolha)
                 {
                     case 1 -> MenuEstoque();
                     case 2 -> MenuCarrinho();
+                    case 3 -> System.exit(0);
                     default -> MenuGeral();
                 }
             }
@@ -81,7 +83,7 @@ public class Main
                         else
                             System.out.println("Livro não encontrado !");
                     }
-                    case 4 -> System.out.println(Estoque.ValorTotalEmEstoque());
+                    case 4 -> System.out.println(NumberFormat.getCurrencyInstance().format(Estoque.ValorTotalEmEstoque()));
 
                     case 5 -> Estoque.ImprimirEstoque();
 
@@ -149,7 +151,9 @@ public class Main
     public static void main(String[] args) throws Excessao
     {
         /*
-            categoria,
+            Já Cadastrei as categorias. Acho que já tá pronto.
+
+            Só falta verificar onde tá bugando a leitura de Strings.
          */
 
         MenuGeral();
