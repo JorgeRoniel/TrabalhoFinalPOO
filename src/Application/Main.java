@@ -2,45 +2,46 @@ package Application;
 
 import Carrinho_Livros.Carrinho;
 import Estoque.Estoque;
-import Exceptions.Excessao;
+import Exceptions.*;
 import java.text.NumberFormat;
 import java.time.DateTimeException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import Livros.*;
 
+import javax.xml.crypto.Data;
+
 public class Main
 {
     private static final Scanner entrada = new Scanner(System.in);
 
-    public static void MenuGeral() throws InputMismatchException
+    public static void MenuGeral() throws InputMismatchException,DataInvalida, PrecoInvalido, QuantidadeInvalida
     {
-        while(true)
+        try
         {
-            try
+            while (true)
             {
                 System.out.println("Digite 1 para ir para o Menu do CONTROLE DE ESTOQUE !");
                 System.out.println("Digite 2 para ir para o Menu de VENDAS !");
                 System.out.println("Digite 3 para sair !");
                 int escolha = entrada.nextInt();
 
-                switch (escolha)
-                {
+                switch (escolha) {
                     case 1 -> MenuEstoque();
                     case 2 -> MenuCarrinho();
                     case 3 -> System.exit(0);
                     default -> MenuGeral();
                 }
             }
-            catch (InputMismatchException e)
-            {
-                System.out.println("Você precisa digitar um número !");
-                break;
-            }
+        }
+        catch(InputMismatchException | DataInvalida | QuantidadeInvalida | LivroNaoExiste | PrecoInvalido e )
+        {
+            System.out.println(e.getMessage());
         }
     }
 
-    public static void MenuEstoque() throws InputMismatchException
+    public static void MenuEstoque() throws InputMismatchException, DataInvalida,
+            QuantidadeInvalida, PrecoInvalido,LivroNaoExiste
     {
         try
         {
@@ -81,13 +82,9 @@ public class Main
 
                         Livro livro = Estoque.BuscarLivro(titulo);
 
-                        if(livro != null)
-                        {
-                            System.out.println("Livro encontrado ! Imprimindo os dados...............");
-                            System.out.println();
-                        }
-                        else
-                            System.out.println("Livro não encontrado !");
+                        System.out.println("Livro encontrado ! Imprimindo os dados...............");
+                        System.out.println(livro);
+
                     }
                     case 4 -> System.out.println(NumberFormat.getCurrencyInstance().format(Estoque.ValorTotalEmEstoque()));
 
@@ -103,16 +100,12 @@ public class Main
                 }
             }
         }
-        catch (InputMismatchException e)
+        catch (InputMismatchException | DataInvalida | PrecoInvalido | LivroNaoExiste | QuantidadeInvalida e)
         {
-            System.out.println("Dados inválidos !");
-        }
-        catch (DateTimeException e)
-        {
-            System.out.println("Data inválida !");
+            System.out.println(e.getMessage());
         }
     }
-    public static void MenuCarrinho() throws InputMismatchException
+    public static void MenuCarrinho() throws InputMismatchException, LivroNaoExiste, PrecoInvalido
     {
         Carrinho carrinho = new Carrinho();
 
@@ -154,17 +147,13 @@ public class Main
                 }
             }
         }
-        catch (InputMismatchException e)
+        catch (InputMismatchException | LivroNaoExiste e)
         {
-            System.out.println("Dados inválidos !");
-        }
-        catch (Excessao e)
-        {
-            throw new RuntimeException(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
-    public static void main(String[] args) throws Excessao
+    public static void main(String[] args) throws DataInvalida, PrecoInvalido, QuantidadeInvalida
     {
         /*
             Este código se encontra armazenado no seguinte repositório:

@@ -1,13 +1,18 @@
 package Estoque;
 
-import Exceptions.Excessao;
+import Exceptions.DataInvalida;
+import Exceptions.*;
 import Livros.Autor;
 import Livros.Livro;
 import Livros.LivroFisico;
 import Livros.LivroVirtual;
 import Enum.*;
+
+import javax.xml.crypto.Data;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
 import java.util.*;
 
 public class Estoque
@@ -16,7 +21,15 @@ public class Estoque
 
     static List<Livro> livrosEstoque = new ArrayList<>();
 
-    private static Autor CadastrarAutor() throws DateTimeException, InputMismatchException
+    private static void VerificarData(int dia, int mes, int ano) throws DataInvalida
+    {
+        if( dia <= 0 || dia > 31 || dia > Month.of(mes).length(Year.isLeap(ano))
+                || mes <= 0 || mes > 12 || ano <= 0 || ano > LocalDate.now().getYear())
+
+            throw new DataInvalida(ano, mes, dia);
+    }
+
+    private static Autor CadastrarAutor() throws DataInvalida, InputMismatchException
     {
         try
         {
@@ -34,13 +47,15 @@ public class Estoque
             System.out.println("Digite o ano de nascimento do autor: ");
             int ano = entrada.nextInt();
 
+            VerificarData(dia, mes, ano);
+
             return new Autor(nomeAutor,LocalDate.of(ano, mes, dia));
         }
         catch (DateTimeException e)
         {
             System.out.println("Data informada é inválida !");
 
-            System.out.println("Tente novamente !");
+            System.out.println(e.getMessage());
 
         }
         catch (InputMismatchException e)
@@ -69,8 +84,9 @@ public class Estoque
 
     public static String LivroMaisVendido()
     {
-        int maior = 0, i = 0;
+        int maior = 0;
         String titulo = "";
+
         for(Livro livro: livrosEstoque)
         {
             if(livro.getQuantidadeVendas() > maior) {
@@ -94,86 +110,87 @@ public class Estoque
 
         for (Livro livro : livrosEstoque)
         {
-            System.out.print(livro.getTitulo() + " " + livro.getPreco() + " " );
+            System.out.print(livro.getTitulo() + " " + livro.getPreco() + " ");
             System.out.print(" - " + i + "\n");
             i++;
         }
 
-        System.out.println("Digite o índice do livro que você quer atualizar !");
-        short indice = entrada.nextShort();
-
-        entrada.nextLine();
-
-        System.out.println("O que você deseja atualizar ?");
-        System.out.println("Digite 1 para título !");
-        System.out.println("Digite 2 para ISBN !");
-        System.out.println("Digite 3 para Editora !");
-        System.out.println("Digite 4 para o preço !");
-        System.out.println("Digite 5 para data de publicação !");
-
-        short opcao = entrada.nextShort();
-
-        switch (opcao)
+        try
         {
-            case 1 ->
-            {
-                entrada.nextLine();
+            System.out.println("Digite o índice do livro que você quer atualizar !");
+            short indice = entrada.nextShort();
 
-                System.out.println("Digite o novo título !");
-                String titulo = entrada.nextLine();
+            entrada.nextLine();
 
-                livrosEstoque.get(indice).setTitulo(titulo);
-            }
+            System.out.println("O que você deseja atualizar ?");
+            System.out.println("Digite 1 para título !");
+            System.out.println("Digite 2 para ISBN !");
+            System.out.println("Digite 3 para Editora !");
+            System.out.println("Digite 4 para o preço !");
+            System.out.println("Digite 5 para data de publicação !");
 
-            case 2 ->
-            {
-                entrada.nextLine();
+            short opcao = entrada.nextShort();
 
-                System.out.println("Digite o novo ISBN !");
-                String isbn = entrada.nextLine();
+            switch (opcao) {
+                case 1 -> {
+                    entrada.nextLine();
 
-                livrosEstoque.get(indice).setIsbn(isbn);
-            }
+                    System.out.println("Digite o novo título !");
+                    String titulo = entrada.nextLine();
 
-            case 3 ->
-            {
-                entrada.nextLine();
+                    livrosEstoque.get(indice).setTitulo(titulo);
+                }
 
-                System.out.println("Digite a nova editora !");
-                String editora = entrada.nextLine();
+                case 2 -> {
+                    entrada.nextLine();
 
-                livrosEstoque.get(indice).setEditora(editora);
-            }
+                    System.out.println("Digite o novo ISBN !");
+                    String isbn = entrada.nextLine();
 
-            case 4 ->
-            {
-                System.out.println("Digite o novo preço !");
-                Double preco = entrada.nextDouble();
+                    livrosEstoque.get(indice).setIsbn(isbn);
+                }
 
-                livrosEstoque.get(indice).setPreco(preco);
-            }
+                case 3 -> {
+                    entrada.nextLine();
 
-            case 5 ->
-            {
-                System.out.println("Digite o dia de lançamento do livro !");
-                int dia = entrada.nextInt();
+                    System.out.println("Digite a nova editora !");
+                    String editora = entrada.nextLine();
 
-                System.out.println("Digite o mês de lançamento do livro !");
-                int mes = entrada.nextInt();
+                    livrosEstoque.get(indice).setEditora(editora);
+                }
 
-                System.out.println("Digite o ano de lançamento do livro !");
-                int ano = entrada.nextInt();
+                case 4 -> {
+                    System.out.println("Digite o novo preço !");
+                    Double preco = entrada.nextDouble();
 
-                livrosEstoque.get(indice).setDataPublicacao(LocalDate.of(ano, mes, dia));
-            }
+                    livrosEstoque.get(indice).setPreco(preco);
+                }
 
-            default ->
-            {
-                return;
-            }
+                case 5 -> {
+                    System.out.println("Digite o dia de lançamento do livro !");
+                    int dia = entrada.nextInt();
+
+                    System.out.println("Digite o mês de lançamento do livro !");
+                    int mes = entrada.nextInt();
+
+                    System.out.println("Digite o ano de lançamento do livro !");
+                    int ano = entrada.nextInt();
+
+                    livrosEstoque.get(indice).setDataPublicacao(LocalDate.of(ano, mes, dia));
+                }
+
+                default -> {
+                    return;
+                }
+            } // Switch
+        } // Try
+        catch (InputMismatchException e)
+        {
+            System.out.println("Dados inválidos !");
         }
     }
-    public static void CadastrarNovoLivro() throws DateTimeException, InputMismatchException
+
+    public static void CadastrarNovoLivro() throws DataInvalida, QuantidadeInvalida, PrecoInvalido
     {
         int quantidade;
 
@@ -191,6 +208,9 @@ public class Estoque
             System.out.println("Digite o preço do livro !");
             double preco = entrada.nextDouble();
 
+            if(preco <=0)
+                throw new PrecoInvalido(preco);
+
             entrada.nextLine();
 
             System.out.println("Digite 1 para livro físico e 2 para virtual !");
@@ -205,22 +225,25 @@ public class Estoque
             System.out.println("Digite o ano de lançamento do livro !");
             int ano = entrada.nextInt();
 
-            System.out.println("Selecione uma das opções para categoria !\n" +
-                    "AutoAjuda - 1\n" +
-                    "Romance - 2,\n" +
-                    "Ficcao - 3,\n" +
-                    "Historia - 4,\n" +
-                    "HQ - 5 ,\n" +
-                    "Religiao - 6,\n" +
-                    "Fantasia - 7,\n" +
-                    "Literatura - 8,\n" +
-                    "Biografias - 9,\n" +
-                    "Familia - 10");
+            VerificarData(dia,mes,ano);
+
+            System.out.println("""
+                    Selecione uma das opções para categoria !
+                    AutoAjuda - 1
+                    Romance - 2,
+                    Ficcao - 3,
+                    Historia - 4,
+                    HQ - 5 ,
+                    Religiao - 6,
+                    Fantasia - 7,
+                    Literatura - 8,
+                    Biografias - 9,
+                    Familia - 10""");
 
             Categoria[] categoria = Categoria.values();
             short escolha = entrada.nextShort();
 
-            Excessao.ValidarData(ano,mes,dia);
+            VerificarData(dia, mes, ano);
 
             if(tipoLivro == 1)
             {
@@ -229,6 +252,9 @@ public class Estoque
 
                 System.out.println("Digite a quantidade de livros para cadastrar no estoque !");
                 quantidade = entrada.nextInt();
+
+                if(quantidade <= 0)
+                    throw new QuantidadeInvalida(quantidade);
 
                 TipoCapa tipoCapa;
 
@@ -246,23 +272,14 @@ public class Estoque
                         LocalDate.of(ano, mes, dia), CadastrarAutor(), categoria[escolha - 1]));
 
         }
-        catch(InputMismatchException e)
-        {
-            System.out.println("Dados inválidos !");
-        }
 
-        catch (DateTimeException e)
+        catch (InputMismatchException | DataInvalida | QuantidadeInvalida | PrecoInvalido e)
         {
-            System.out.println("Data inválida !");
-        }
-
-        catch (IllegalArgumentException e)
-        {
-            System.out.println("Quantidade de livros cadastradas é inválida !");
+            System.out.println(e.getMessage());
         }
     }
 
-    public static Livro BuscarLivro(String titulo)
+    public static Livro BuscarLivro(String titulo) throws LivroNaoExiste
     {
         for(Livro livro: livrosEstoque)
         {
@@ -271,7 +288,7 @@ public class Estoque
                 return livro;
             }
         }
-        return null;
+        throw new LivroNaoExiste(titulo);
     }
 
 }

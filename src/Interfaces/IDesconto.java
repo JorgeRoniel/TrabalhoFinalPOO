@@ -1,10 +1,10 @@
 package Interfaces;
 
-import Exceptions.Excessao;
+import Exceptions.PrecoInvalido;
 
 public interface IDesconto
 {
-    double getPrecoDesconto(double preco) throws Excessao;
+    double getPrecoDesconto(double preco) throws PrecoInvalido;
 
 }
 

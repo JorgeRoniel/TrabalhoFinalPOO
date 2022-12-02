@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment="Já Cadastrei as categorias. Acho que já tá pronto.&#10;            &#10;Só falta verificar onde tá bugando a leitura de Strings.">
+    <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment="Programa finalizado !">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Application/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enum/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enum/Categoria.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Estoque/Estoque.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estoque/Estoque.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Exceptions/Excessao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/DataInvalida.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaces/ICarrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/ICarrinho.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaces/IDesconto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/IDesconto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interfaces/IJuros.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/IJuros.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +83,11 @@
       <workItem from="1669811756843" duration="5080000" />
       <workItem from="1669831068583" duration="5169000" />
       <workItem from="1669861419940" duration="3462000" />
-      <workItem from="1669909731517" duration="1230000" />
+      <workItem from="1669909731517" duration="2399000" />
+      <workItem from="1669934463596" duration="231000" />
+      <workItem from="1669934715809" duration="1633000" />
+      <workItem from="1669938985554" duration="312000" />
+      <workItem from="1670011209782" duration="4239000" />
     </task>
     <task id="LOCAL-00001" summary="Adicionei a classe abstrata Livro.">
       <created>1668794946689</created>
@@ -201,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669864844685</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Programa finalizado !">
+      <created>1669911110899</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1669911110899</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,7 +243,8 @@
     <MESSAGE value=" Fiz a parte do estoque. Falta fazer só a parte do tratamento de excessões e as categorias.&#10;&#10;O resto já ta tudo ok." />
     <MESSAGE value="Cadastrar as categorias" />
     <MESSAGE value="Já Cadastrei as categorias. Acho que já tá pronto.&#10;            &#10;Só falta verificar onde tá bugando a leitura de Strings." />
-    <option name="LAST_COMMIT_MESSAGE" value="Já Cadastrei as categorias. Acho que já tá pronto.&#10;            &#10;Só falta verificar onde tá bugando a leitura de Strings." />
+    <MESSAGE value="Programa finalizado !" />
+    <option name="LAST_COMMIT_MESSAGE" value="Programa finalizado !" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

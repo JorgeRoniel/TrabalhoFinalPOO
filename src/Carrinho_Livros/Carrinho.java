@@ -1,7 +1,8 @@
 package Carrinho_Livros;
 
 import Estoque.Estoque;
-import Exceptions.Excessao;
+import Exceptions.*;
+import Exceptions.PrecoInvalido;
 import Livros.Livro;
 import Livros.LivroFisico;
 import Livros.LivroVirtual;
@@ -10,8 +11,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import Interfaces.*;
 
-public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Interfaces.IJuros
+public class Carrinho implements ICarrinho, IDesconto, IJuros
 {
     private final Scanner entrada = new Scanner(System.in);
     List<Livro> carrinho = new ArrayList<>();
@@ -29,7 +31,7 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
         System.out.print("Total da compra até o momento: \n" + NumberFormat.getCurrencyInstance().format(soma) + "\n");
     }
     @Override
-    public void AdicionarLivroCarrinho() throws InputMismatchException
+    public void AdicionarLivroCarrinho() throws InputMismatchException, LivroNaoExiste
     {
         try
         {
@@ -74,13 +76,9 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
                 System.out.println("Não encontramos o seu livro !");
         }
 
-        catch (InputMismatchException e)
+        catch (InputMismatchException | LivroNaoExiste e)
         {
-            System.out.println("Dados informados são inválidos !");
-
-            System.out.println("Tente novamente !");
-
-            AdicionarLivroCarrinho();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -109,24 +107,17 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
     }
 
     @Override
-    public double getPrecoDesconto(double preco) throws Excessao
+    public double getPrecoDesconto(double preco) throws PrecoInvalido
     {
-        try
-        {
-            Excessao.ValidarPreco(preco);
+        if(preco < 0)
+            throw new PrecoInvalido(preco);
+        else
+            return preco * 0.95;  // 5% de desconto !
 
-            return preco * 0.85;  // 15% de desconto !
-        }
-        catch (IllegalArgumentException e)
-        {
-            System.out.println(e.getMessage());
-        }
-
-        return 0;
     }
 
     @Override
-    public double getPrecoComJuros(double preco, int quantidadeParcelas)
+    public double getPrecoComJuros(double preco, int quantidadeParcelas) throws PrecoInvalido
     {
         if(quantidadeParcelas < 4 && preco > 50)
             return preco * 1.05;
@@ -136,8 +127,7 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
     }
 
     @Override
-    public void CheckOut() throws Excessao
-    {
+    public void CheckOut() throws PrecoInvalido {
         double soma = 0;
         double precoFinal = 0;
 
@@ -204,33 +194,12 @@ public class Carrinho implements Interfaces.ICarrinho, Interfaces.IDesconto, Int
             }// if
         } // try
 
-        catch (InputMismatchException e)
+        catch (InputMismatchException | PrecoInvalido e)
         {
-            System.out.println("Dados inválidos !");
+            System.out.println(e.getMessage());
         }
+
     } // class
-
-    public void Pesquisar() throws InputMismatchException
-    {
-        try
-        {
-            System.out.println("Digite o título para pesquisa !");
-            String titulo = entrada.nextLine();
-
-            for (Livro livro : carrinho)
-            {
-                if (Objects.equals(titulo, livro.getTitulo()))
-                {
-                    System.out.println("Imprimindo os dados do livro.................");
-                    System.out.println(livro);
-                }
-            }
-        }
-        catch (InputMismatchException e)
-        {
-            System.out.println("Dados inválidos !");
-        }
-    }
 
     public void PesquisarPorPreco(Integer precoInicial, Integer precoFinal) throws IllegalArgumentException
     {

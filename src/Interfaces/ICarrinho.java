@@ -1,10 +1,12 @@
 package Interfaces;
 
-import Exceptions.Excessao;
+import Exceptions.LivroNaoExiste;
+import Exceptions.PrecoInvalido;
 
-public interface ICarrinho {
-    void AdicionarLivroCarrinho();
+public interface ICarrinho
+{
+    void AdicionarLivroCarrinho() throws LivroNaoExiste;
     void RemoverLivroCarrinho();
-    void CheckOut() throws Excessao;
+    void CheckOut() throws PrecoInvalido;
 
 }
