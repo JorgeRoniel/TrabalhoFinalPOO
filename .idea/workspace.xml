@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment="Programa finalizado !">
+    <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment="Exceptions refatoradas !">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Application/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Application/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Carrinho_Livros/Carrinho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Estoque/Estoque.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estoque/Estoque.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exceptions/Excessao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/DataInvalida.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaces/ICarrinho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/ICarrinho.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaces/IDesconto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/IDesconto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Interfaces/IJuros.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interfaces/IJuros.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Exceptions/LivroNaoExiste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/LivroNaoExiste.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +81,7 @@
       <workItem from="1669934463596" duration="231000" />
       <workItem from="1669934715809" duration="1633000" />
       <workItem from="1669938985554" duration="312000" />
-      <workItem from="1670011209782" duration="4239000" />
+      <workItem from="1670011209782" duration="4766000" />
     </task>
     <task id="LOCAL-00001" summary="Adicionei a classe abstrata Livro.">
       <created>1668794946689</created>
@@ -215,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669911110899</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Exceptions refatoradas !">
+      <created>1670016100859</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1670016100859</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +245,8 @@
     <MESSAGE value="Cadastrar as categorias" />
     <MESSAGE value="Já Cadastrei as categorias. Acho que já tá pronto.&#10;            &#10;Só falta verificar onde tá bugando a leitura de Strings." />
     <MESSAGE value="Programa finalizado !" />
-    <option name="LAST_COMMIT_MESSAGE" value="Programa finalizado !" />
+    <MESSAGE value="Exceptions refatoradas !" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exceptions refatoradas !" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

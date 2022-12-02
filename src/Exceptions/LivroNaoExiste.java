@@ -2,13 +2,20 @@ package Exceptions;
 
 public class LivroNaoExiste extends Exception
 {
-    String mensagem, titulo;
+    String mensagem;
 
-    public LivroNaoExiste(String titulo) throws LivroNaoExiste
+    public LivroNaoExiste(String mensagem)
     {
-        this.mensagem = "Não existe nenhum livro com o título: ";
-        this.titulo = titulo;
+        this.mensagem = mensagem;
+    }
+    public LivroNaoExiste() throws LivroNaoExiste
+    {
+        throw new LivroNaoExiste("O livro informado não existe !");
+    }
 
-        throw new LivroNaoExiste( "Não existe nenhum livro com o título: " + titulo);
+    @Override
+    public String getMessage()
+    {
+        return mensagem;
     }
 }

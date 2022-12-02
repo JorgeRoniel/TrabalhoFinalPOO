@@ -288,7 +288,7 @@ public class Estoque
                 return livro;
             }
         }
-        throw new LivroNaoExiste(titulo);
+        throw new LivroNaoExiste();
     }
 
 }
