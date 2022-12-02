@@ -4,7 +4,6 @@ import Carrinho_Livros.Carrinho;
 import Estoque.Estoque;
 import Exceptions.*;
 import java.text.NumberFormat;
-import java.time.DateTimeException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import Livros.*;

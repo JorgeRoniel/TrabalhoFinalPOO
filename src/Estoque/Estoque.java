@@ -7,8 +7,6 @@ import Livros.Livro;
 import Livros.LivroFisico;
 import Livros.LivroVirtual;
 import Enum.*;
-
-import javax.xml.crypto.Data;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Month;
