@@ -2,8 +2,7 @@ package Exceptions;
 
 public class PrecoInvalido extends Exception
 {
-
-    String mensagem;
+    private String mensagem;
 
     public PrecoInvalido(String mensagem)
     {

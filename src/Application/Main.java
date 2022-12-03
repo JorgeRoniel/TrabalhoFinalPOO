@@ -8,8 +8,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import Livros.*;
 
-import javax.xml.crypto.Data;
-
 public class Main
 {
     private static final Scanner entrada = new Scanner(System.in);
@@ -25,7 +23,8 @@ public class Main
                 System.out.println("Digite 3 para sair !");
                 int escolha = entrada.nextInt();
 
-                switch (escolha) {
+                switch (escolha)
+                {
                     case 1 -> MenuEstoque();
                     case 2 -> MenuCarrinho();
                     case 3 -> System.exit(0);
@@ -155,6 +154,8 @@ public class Main
     public static void main(String[] args) throws DataInvalida, PrecoInvalido, QuantidadeInvalida
     {
         /*
+            Feito por Miguel e Jorge
+
             Este código se encontra armazenado no seguinte repositório:
 
             https://github.com/JorgeRoniel/TrabalhoFinalPOO

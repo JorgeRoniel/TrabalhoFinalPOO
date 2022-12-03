@@ -2,7 +2,7 @@ package Exceptions;
 
 public class QuantidadeInvalida extends Exception
 {
-    String mensagem;
+    private String mensagem;
 
     public QuantidadeInvalida(String mensagem )
     {

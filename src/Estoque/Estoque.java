@@ -19,10 +19,11 @@ public class Estoque
 
     static List<Livro> livrosEstoque = new ArrayList<>();
 
-    private static void VerificarData(int dia, int mes, int ano) throws DataInvalida
+    private static void VerificarData(int dia, int mes, int ano) throws DataInvalida, DateTimeException
     {
-        if( dia <= 0 || dia > 31 || dia > Month.of(mes).length(Year.isLeap(ano))
-                || mes <= 0 || mes > 12 || ano <= 0 || ano > LocalDate.now().getYear())
+        if( dia <= 0 || dia > 31 || dia > Month.of(mes).length(Year.isLeap(ano)) // dias
+                || mes <= 0 || mes > 12  // mes
+                || ano <= 0 || ano > LocalDate.now().getYear()) // ano
 
             throw new DataInvalida(ano, mes, dia);
     }
@@ -49,19 +50,14 @@ public class Estoque
 
             return new Autor(nomeAutor,LocalDate.of(ano, mes, dia));
         }
-        catch (DateTimeException e)
+        catch (DataInvalida | InputMismatchException e )
         {
-            System.out.println("Data informada é inválida !");
-
             System.out.println(e.getMessage());
 
-        }
-        catch (InputMismatchException e)
-        {
-            System.out.println("Dados inválidos !");
+            System.out.println("Tente novamente !");
         }
 
-        return null;
+        return CadastrarAutor();
     }
 
     public static Double ValorTotalEmEstoque()
@@ -268,13 +264,14 @@ public class Estoque
             else
                 livrosEstoque.add(new LivroVirtual(titulo, editora, isbn, preco,
                         LocalDate.of(ano, mes, dia), CadastrarAutor(), categoria[escolha - 1]));
-
         }
 
-        catch (InputMismatchException | DataInvalida | QuantidadeInvalida | PrecoInvalido e)
+        catch (InputMismatchException | DataInvalida | QuantidadeInvalida | PrecoInvalido | DateTimeException e)
         {
             System.out.println(e.getMessage());
         }
+
+        entrada.nextLine();
     }
 
     public static Livro BuscarLivro(String titulo) throws LivroNaoExiste
@@ -286,6 +283,7 @@ public class Estoque
                 return livro;
             }
         }
+
         throw new LivroNaoExiste();
     }
 

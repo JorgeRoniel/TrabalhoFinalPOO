@@ -2,7 +2,7 @@ package Exceptions;
 
 public class LivroNaoExiste extends Exception
 {
-    String mensagem;
+    private String mensagem;
 
     public LivroNaoExiste(String mensagem)
     {
