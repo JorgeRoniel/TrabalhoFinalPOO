@@ -8,7 +8,6 @@ public class DataInvalida extends Exception
 {
     private String mensagem;
 
-
     private DataInvalida(String mensagem)
     {
         this.mensagem = mensagem;

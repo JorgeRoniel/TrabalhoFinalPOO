@@ -7,7 +7,8 @@ import Livros.Livro;
 import Livros.LivroFisico;
 import Livros.LivroVirtual;
 import Enum.*;
-import java.time.DateTimeException;
+
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
@@ -54,7 +55,7 @@ public class Estoque
 
             return new Autor(nomeAutor,LocalDate.of(ano, mes, dia));
         }
-        catch (DataInvalida | InputMismatchException e )
+        catch (DataInvalida | InputMismatchException e)
         {
             System.out.println(e.getMessage());
 
@@ -108,7 +109,7 @@ public class Estoque
 
         for (Livro livro : livrosEstoque)
         {
-            System.out.print(livro.getTitulo() + " " + livro.getPreco() + " ");
+            System.out.print("Título: " + livro.getTitulo() + " preço: " + NumberFormat.getCurrencyInstance().format(livro.getPreco()));
             System.out.println(" - índice: " + i + "\n");
             i++;
         }
@@ -182,7 +183,8 @@ public class Estoque
                     livrosEstoque.get(indice).setDataPublicacao(LocalDate.of(ano, mes, dia));
                 }
 
-                default -> {
+                default ->
+                {
                     return;
                 }
             } // Switch

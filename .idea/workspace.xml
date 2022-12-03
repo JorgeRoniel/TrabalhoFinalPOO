@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment="Exceptions refatoradas !">
+    <list default="true" id="0b33d30a-7fb0-4cc2-90c6-cd10828a6b86" name="Changes" comment="Exceptions refatoradas ! E mais algumas melhorias e correções de bugs de leitura de string.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Estoque/Estoque.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Estoque/Estoque.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Exceptions/DataInvalida.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/DataInvalida.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +116,9 @@
       <workItem from="1670029075154" duration="334000" />
       <workItem from="1670029423155" duration="2787000" />
       <workItem from="1670032248790" duration="1644000" />
-      <workItem from="1670034201366" duration="358000" />
+      <workItem from="1670034201366" duration="656000" />
+      <workItem from="1670076563991" duration="502000" />
+      <workItem from="1670084891283" duration="1009000" />
     </task>
     <task id="LOCAL-00001" summary="Adicionei a classe abstrata Livro.">
       <created>1668794946689</created>
@@ -299,7 +302,21 @@
       <option name="project" value="LOCAL" />
       <updated>1670033854568</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Exceptions refatoradas !">
+      <created>1670034647110</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1670034647110</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Exceptions refatoradas ! E mais algumas melhorias e correções de bugs de leitura de string.">
+      <created>1670034823822</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1670034823822</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,7 +346,8 @@
     <MESSAGE value="Já Cadastrei as categorias. Acho que já tá pronto.&#10;            &#10;Só falta verificar onde tá bugando a leitura de Strings." />
     <MESSAGE value="Programa finalizado !" />
     <MESSAGE value="Exceptions refatoradas !" />
-    <option name="LAST_COMMIT_MESSAGE" value="Exceptions refatoradas !" />
+    <MESSAGE value="Exceptions refatoradas ! E mais algumas melhorias e correções de bugs de leitura de string." />
+    <option name="LAST_COMMIT_MESSAGE" value="Exceptions refatoradas ! E mais algumas melhorias e correções de bugs de leitura de string." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
