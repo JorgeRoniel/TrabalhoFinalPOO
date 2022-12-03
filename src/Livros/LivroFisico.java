@@ -31,7 +31,7 @@ public class LivroFisico extends Livro {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return "\nTítulo do livro: " +getTitulo() +"\n" +
                 "Tipo do livro: Fisico\n"+
                 "Código ISBN: " +getIsbn() + "\n" +

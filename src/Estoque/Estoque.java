@@ -100,7 +100,7 @@ public class Estoque
     }
     public static void AtualizarLivro() throws IllegalArgumentException, InputMismatchException
     {
-        int i = 1;
+        int i = 0;
 
         for (Livro livro : livrosEstoque)
         {

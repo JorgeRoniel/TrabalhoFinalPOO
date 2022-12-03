@@ -31,7 +31,7 @@ public class Carrinho implements ICarrinho, IDesconto, IJuros
         System.out.print("Total da compra até o momento: \n" + NumberFormat.getCurrencyInstance().format(soma) + "\n");
     }
     @Override
-    public void AdicionarLivroCarrinho() throws InputMismatchException, LivroNaoExiste
+    public final void AdicionarLivroCarrinho() throws InputMismatchException, LivroNaoExiste
     {
         try
         {
@@ -83,7 +83,7 @@ public class Carrinho implements ICarrinho, IDesconto, IJuros
     }
 
     @Override
-    public void RemoverLivroCarrinho()
+    public final void RemoverLivroCarrinho()
     {
         int i = 0;
 
@@ -107,7 +107,7 @@ public class Carrinho implements ICarrinho, IDesconto, IJuros
     }
 
     @Override
-    public double getPrecoDesconto(double preco) throws PrecoInvalido
+    public final double getPrecoDesconto(double preco) throws PrecoInvalido
     {
         if(preco < 0)
             throw new PrecoInvalido(preco);
@@ -117,7 +117,7 @@ public class Carrinho implements ICarrinho, IDesconto, IJuros
     }
 
     @Override
-    public double getPrecoComJuros(double preco, int quantidadeParcelas) throws PrecoInvalido
+    public final double getPrecoComJuros(double preco, int quantidadeParcelas) throws PrecoInvalido
     {
         if(quantidadeParcelas < 4 && preco > 50)
             return preco * 1.05;
@@ -127,7 +127,7 @@ public class Carrinho implements ICarrinho, IDesconto, IJuros
     }
 
     @Override
-    public void CheckOut() throws PrecoInvalido {
+    public final void CheckOut() throws PrecoInvalido {
         double soma = 0;
         double precoFinal = 0;
 

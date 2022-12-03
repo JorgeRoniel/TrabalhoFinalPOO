@@ -4,7 +4,7 @@ public class LivroNaoExiste extends Exception
 {
     private String mensagem;
 
-    public LivroNaoExiste(String mensagem)
+    private LivroNaoExiste(String mensagem)
     {
         this.mensagem = mensagem;
     }
@@ -14,7 +14,7 @@ public class LivroNaoExiste extends Exception
     }
 
     @Override
-    public String getMessage()
+    public final String getMessage()
     {
         return mensagem;
     }
