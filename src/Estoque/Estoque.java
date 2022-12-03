@@ -19,13 +19,17 @@ public class Estoque
 
     static List<Livro> livrosEstoque = new ArrayList<>();
 
-    private static void VerificarData(int dia, int mes, int ano) throws DataInvalida, DateTimeException
+    private static void VerificarData(int dia, int mes, int ano) throws DataInvalida
     {
-        if( dia <= 0 || dia > 31 || dia > Month.of(mes).length(Year.isLeap(ano)) // dias
-                || mes <= 0 || mes > 12  // mes
-                || ano <= 0 || ano > LocalDate.now().getYear()) // ano
+            if(
+                    dia <= 0 || dia > 31 // dias
+                    || mes <= 0 || mes > 12  // mes
+                    || ano <= 0 || ano > LocalDate.now().getYear() // ano
+                    || dia > Month.of(mes).length(Year.isLeap(ano)) // Verificar se o dia é maior que os dias do mês
 
-            throw new DataInvalida(ano, mes, dia);
+            )// fim do IF
+
+                throw new DataInvalida(ano, mes, dia);
     }
 
     private static Autor CadastrarAutor() throws DataInvalida, InputMismatchException
@@ -207,7 +211,7 @@ public class Estoque
             System.out.println("Digite o preço do livro !");
             double preco = entrada.nextDouble();
 
-            if(preco <=0)
+            if(preco <= 0)
                 throw new PrecoInvalido(preco);
 
             entrada.nextLine();
@@ -271,7 +275,7 @@ public class Estoque
                         LocalDate.of(ano, mes, dia), CadastrarAutor(), categoria[escolha - 1]));
         }
 
-        catch (InputMismatchException | DataInvalida | QuantidadeInvalida | PrecoInvalido | DateTimeException e)
+        catch (InputMismatchException | DataInvalida | QuantidadeInvalida | PrecoInvalido e)
         {
             System.out.println(e.getMessage());
         }
