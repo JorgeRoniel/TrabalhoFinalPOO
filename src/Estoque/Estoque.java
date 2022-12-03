@@ -98,9 +98,9 @@ public class Estoque
             System.out.println(livro);
         }
     }
-    public static void AtualizarLivro()
+    public static void AtualizarLivro() throws IllegalArgumentException, InputMismatchException
     {
-        int i = 0;
+        int i = 1;
 
         for (Livro livro : livrosEstoque)
         {
@@ -114,6 +114,9 @@ public class Estoque
             System.out.println("Digite o índice do livro que você quer atualizar !");
             short indice = entrada.nextShort();
 
+            if(indice > i)
+                throw new IllegalArgumentException("Não existe livro com esse índice !");
+
             entrada.nextLine();
 
             System.out.println("O que você deseja atualizar ?");
@@ -125,8 +128,10 @@ public class Estoque
 
             short opcao = entrada.nextShort();
 
-            switch (opcao) {
-                case 1 -> {
+            switch (opcao)
+            {
+                case 1 ->
+                {
                     entrada.nextLine();
 
                     System.out.println("Digite o novo título !");
@@ -178,9 +183,9 @@ public class Estoque
                 }
             } // Switch
         } // Try
-        catch (InputMismatchException e)
+        catch (InputMismatchException | IllegalArgumentException e)
         {
-            System.out.println("Dados inválidos !");
+            System.out.println(e.getMessage());
         }
     }
 
