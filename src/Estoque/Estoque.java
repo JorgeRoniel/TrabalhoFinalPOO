@@ -105,7 +105,7 @@ public class Estoque
         for (Livro livro : livrosEstoque)
         {
             System.out.print(livro.getTitulo() + " " + livro.getPreco() + " ");
-            System.out.print(" - " + i + "\n");
+            System.out.println(" - índice: " + i + "\n");
             i++;
         }
 
