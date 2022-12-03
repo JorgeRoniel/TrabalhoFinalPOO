@@ -4,7 +4,7 @@ public class QuantidadeInvalida extends Exception
 {
     private String mensagem;
 
-    public QuantidadeInvalida(String mensagem )
+    private QuantidadeInvalida(String mensagem )
     {
         this.mensagem = mensagem;
 

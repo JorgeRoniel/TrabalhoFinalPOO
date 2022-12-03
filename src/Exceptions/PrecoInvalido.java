@@ -4,7 +4,7 @@ public class PrecoInvalido extends Exception
 {
     private String mensagem;
 
-    public PrecoInvalido(String mensagem)
+    private PrecoInvalido(String mensagem)
     {
         this.mensagem = mensagem;
     }

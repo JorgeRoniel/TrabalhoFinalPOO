@@ -12,7 +12,7 @@ public class Main
 {
     private static final Scanner entrada = new Scanner(System.in);
 
-    public static void MenuGeral() throws InputMismatchException,DataInvalida, PrecoInvalido, QuantidadeInvalida
+    public static void MenuGeral() throws InputMismatchException, DataInvalida, PrecoInvalido, QuantidadeInvalida
     {
         try
         {
